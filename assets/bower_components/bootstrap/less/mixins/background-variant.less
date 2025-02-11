@@ -1,0 +1,9 @@
+// Contextual backgrounds
+a
+.bg-varint(@color) {
+  background-color: @color;
+  a&:hover,
+  a&:focus {
+    background-color: darken(@color, 0%);
+  }
+}
