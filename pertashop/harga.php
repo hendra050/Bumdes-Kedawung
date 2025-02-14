@@ -45,11 +45,6 @@
                     <div class="modal-body">
 
                       <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="text" name="tanggal" required="required" class="form-control datepicker2">
-                      </div>
-
-                      <div class="form-group">
                         <label>Harga Pokok Per Liter</label>
                         <input type="number" name="harga" required="required" class="form-control" placeholder="Masukkan Update Hpp ..">
                       </div>
@@ -84,7 +79,7 @@
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
-                      <td class="text-center"><?php echo date('d-m-Y', strtotime($d['harga_tanggal'])); ?></td>
+                      <td class="text-center"><?php echo $d['harga_tanggal']; ?></td>
                       <td class="text-center"><?php echo "Rp. ".number_format($d['harga'])." ,-" ?></td>
                       <td class="text-center">    
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_output_<?php echo $d['harga_id'] ?>">

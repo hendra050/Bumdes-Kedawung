@@ -4,7 +4,7 @@ include '../koneksi.php';
 // Ambil data dari form
 $id = $_POST['id']; // ID tambah yang akan diupdate
 $tanggal  = $_POST['tanggal'];
-$jumlah  = $_POST['jumlah'];
+$jumlah  = floatval($_POST['jumlah']);
 $harga  = $_POST['harga'];
 
 // Hitung total harga

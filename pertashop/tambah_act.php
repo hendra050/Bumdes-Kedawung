@@ -3,7 +3,7 @@ include '../koneksi.php';
 
 // Ambil data dari form input
 $tanggal  = $_POST['tanggal'];
-$jumlah  = $_POST['jumlah'];
+$jumlah  = floatval($_POST['jumlah']);
 $harga  = $_POST['harga'];
 
 // Hitung total harga
@@ -20,7 +20,8 @@ $filename = $_FILES['foto']['name'];
 
 // Cek jika file tidak diupload
 if($filename == ""){
-	mysqli_query($koneksi, "INSERT INTO in_pertashop (input_tanggal, input_jumlah, input_perliter, input_harga, input_foto) VALUES ('$tanggal', '$jumlah', '$harga', '$total_harga', '')");
+	mysqli_query($koneksi, "INSERT INTO in_pertashop (input_tanggal, input_jumlah, input_perliter, input_harga, input_foto) 
+	VALUES (NOW(), '$jumlah', '$harga', '$total_harga', '')");
 	header("location:tambah.php");
 }else{
 	// Ambil ekstensi file yang diupload
@@ -37,7 +38,7 @@ if($filename == ""){
 		$file_gambar = $rand.'_'.$filename;
 
 		// Simpan data ke database
-		mysqli_query($koneksi, "INSERT INTO in_pertashop (input_tanggal, input_jumlah, input_perliter, input_harga, input_foto) VALUES ('$tanggal', '$jumlah', '$harga', '$total_harga', '$file_gambar')");
+		mysqli_query($koneksi, "INSERT INTO in_pertashop (input_tanggal, input_jumlah, input_perliter, input_harga, input_foto) VALUES (NOW(), '$jumlah', '$harga', '$total_harga', '$file_gambar')");
 		header("location:tambah.php");
 	}
 }

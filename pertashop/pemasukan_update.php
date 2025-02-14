@@ -3,7 +3,7 @@ include '../koneksi.php';
 
 $id = $_POST['id'];
 $tanggal  = $_POST['tanggal'];
-$jual     = $_POST['jual'];
+$jual = floatval($_POST['jual']);
 
 // Fetch the latest harga from hpp_pertashop
 $query_harga = "SELECT harga FROM out_pertashop WHERE output_id = '$id' ";

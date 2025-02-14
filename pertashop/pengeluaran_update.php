@@ -1,27 +1,23 @@
-<?php 
+<?php
 include '../koneksi.php';
 
-$id = $_POST['id'];
-$tanggal  = $_POST['tanggal'];
-$jual     = $_POST['jual'];
+if (isset($_POST['id']) && isset($_POST['tanggal']) && isset($_POST['kategori']) && isset($_POST['keterangan']) && isset($_POST['nominal'])) {
+    $id = $_POST['id'];
+    $tanggal = $_POST['tanggal'];
+    $kategori = $_POST['kategori'];
+    $keterangan = $_POST['keterangan'];
+    $nominal = $_POST['nominal'];
 
-// Fetch the latest harga from hpp_pertashop
-$query_harga = "SELECT harga FROM out_pertashop WHERE output_id = '$id' ";
-$result = mysqli_query($koneksi, $query_harga) or die(mysqli_error($koneksi));
+    $query = "UPDATE opex_pertashop SET opex_tanggal = '$tanggal', opex_kategori = '$kategori', opex_keterangan = '$keterangan', opex_nominal = '$nominal' WHERE opex_id = '$id'";
 
-if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $harga = $row['harga'];
+    $result = mysqli_query($koneksi, $query);
 
-    // Calculate total
-    $total = $harga * $jual;
-
-    // Update the record in out_pertashop
-    $update_query = "UPDATE out_pertashop SET output_tanggal='$tanggal', output_jual='$jual', harga='$harga', output_total='$total' WHERE output_id='$id'";
-    mysqli_query($koneksi, $update_query) or die(mysqli_error($koneksi));
-
-    header("location:pemasukan.php");
+    if ($result) {
+    echo "<script> window.location.href='pengeluaran.php';</script>";
+    } else {
+    echo "<script>alert('Gagal mengupdate transaksi!'); window.location.href='pengeluaran.php';</script>";
+    }
 } else {
-    echo "Harga pokok tidak ditemukan. Silakan periksa data harga.";
+    echo "<script>alert('Form belum diisi!'); window.location.href='pengeluaran.php';</script>";
 }
 ?>

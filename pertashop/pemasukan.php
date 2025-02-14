@@ -37,23 +37,16 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title" id="exampleModalLabel">Tambah pengeluaran</h4>
+                      <h4 class="modal-title" id="exampleModalLabel">Tambah Pemasukan</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-
-                      <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="text" name="tanggal" required="required" class="form-control datepicker2">
-                      </div>
-
                       <div class="form-group">
                         <label>Penjualan</label>
-                        <input type="number" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan Hari Ini ..">
-                      </div>
-
+                        <input type="number" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan Hari Ini .." step="0.01" min="0">
+                        </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -71,14 +64,14 @@
                   <tr>
                     <th width="1%" rowspan="2">NO</th>
                     <th width="10%" class="text-center" rowspan="2">TANGGAL</th>
-                    <th width="40%" class="text-center" colspan="3">PENJUALAN</th>
+                    <th width="40%" class="text-center" colspan="3">SHIFT</th>
                     <th class="text-center" rowspan="2">HARGA</th>
                     <th class="text-center" rowspan="2">TOTAL</th>
                     <th width="10%" class="text-center" rowspan="2">OPSI</th>
                   </tr>
                   <tr>
                     <th class="text-center">PAGI</th>
-                    <th class="text-center">SORE</th>
+                    <th class="text-center">SIANG</th>
                     <th class="text-center">FULL DAY</th>
                   </tr>
                 </thead>
@@ -91,10 +84,12 @@
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
-                      <td class="text-center"><?php echo date('d-m-Y', strtotime($d['output_tanggal'])); ?></td>
-                      <td class="text-center"><?php echo $d['output_jual']; ?> liter</td>
-                      <td class="text-center"><?php echo $d['output_jual']; ?> liter</td>
-                      <td class="text-center"><?php echo $d['output_jual']; ?> liter</td>
+                      <td class="text-center"><?php echo $d['output_tanggal']; ?></td>
+                      
+                      <td class="text-center"><?php echo ($d['shift'] == "pagi") ? $d['output_jual'] . " liter" : "-"; ?></td>
+                      <td class="text-center"><?php echo ($d['shift'] == "siang") ? $d['output_jual'] . " liter" : "-"; ?></td>
+                      <td class="text-center"><?php echo ($d['shift'] == "fullday") ? $d['output_jual'] . " liter" : "-"; ?></td>
+
                       <td class="text-center"><?php echo "Rp. ".number_format($d['harga'])." ,-" ?></td>
                       <td class="text-center"><?php echo "Rp. ".number_format($d['output_total'])." ,-" ?></td>
                       <td class="text-center">    
@@ -127,8 +122,8 @@
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Penjualan </label>
-                                    <input type="number" style="width:100%" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan hari ini .." value="<?php echo $d['output_jual'] ?>">
-                                  </div>
+                                    <input type="number" style="width:100%" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan hari ini .." value="<?php echo $d['output_jual']; ?>" step="0.01" min="0">
+                                    </div>
 
                                 </div>
                                 <div class="modal-footer">

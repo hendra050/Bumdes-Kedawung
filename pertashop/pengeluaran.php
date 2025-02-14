@@ -43,12 +43,6 @@
                       </button>
                     </div>
                     <div class="modal-body">
-
-                      <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="text" name="tanggal" required="required" class="form-control datepicker2">
-                      </div>
-
                       <div class="form-group">
                         <label>Kategori</label>
                         <select name="kategori" class="form-control" required="required">
@@ -106,7 +100,7 @@
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
-                      <td class="text-center"><?php echo date('d-m-Y', strtotime($d['opex_tanggal'])); ?></td>
+                      <td class="text-center"><?php echo $d['opex_tanggal']; ?></td>
                       <td><?php echo $d['kategori']; ?></td>
                       <td><?php echo $d['opex_keterangan']; ?></td>
                       <td><?php echo "Rp. ".number_format($d['opex_nominal'])." ,-" ?></td>
@@ -155,12 +149,12 @@
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Nominal</label>
-                                    <input type="number" style="width:100%" name="nominal" required="required" class="form-control" placeholder="Masukkan Nominal .." value="<?php echo $d['transaksi_nominal'] ?>">
+                                    <input type="number" style="width:100%" name="nominal" required="required" class="form-control" placeholder="Masukkan Nominal .." value="<?php echo $d['opex_nominal'] ?>">
                                   </div>
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Keterangan</label>
-                                    <textarea name="keterangan" style="width:100%" class="form-control" rows="4"><?php echo $d['transaksi_keterangan'] ?></textarea>
+                                    <textarea name="keterangan" style="width:100%" class="form-control" rows="4"><?php echo $d['opex_keterangan'] ?></textarea>
                                   </div>
                                 </div>
                                 <div class="modal-footer">

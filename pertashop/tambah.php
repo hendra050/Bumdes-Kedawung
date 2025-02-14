@@ -44,14 +44,9 @@
                     </div>
                     <div class="modal-body">
 
-                      <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="text" name="tanggal" required="required" class="form-control datepicker2">
-                      </div>
-
-                      <div class="form-group">
+                    <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="number" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah ..">
+                        <input type="number" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah .." step="0.01" min="0">
                       </div>
 
                       <div class="form-group">
@@ -97,7 +92,7 @@
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
-                      <td class="text-center"><?php echo date('d-m-Y', strtotime($d['input_tanggal'])); ?></td>
+                      <td class="text-center"><?php echo $d['input_tanggal']; ?></td>
                       <td><?php echo $d['input_jumlah']; ?></td>
                       <td><?php echo "Rp. ".number_format($d['input_perliter'])." ,-" ?></td>
                       <td><?php echo "Rp. ".number_format($d['input_harga'])." ,-" ?></td>
@@ -138,7 +133,7 @@
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Jumlah</label>
-                                    <input type="number" style="width:100%" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah .." value="<?php echo $d['input_jumlah'] ?>">
+                                    <input type="number" style="width:100%" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah .." value="<?php echo $d['input_jumlah'] ?>" step="0.01" min="0">
                                   </div>
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
@@ -161,7 +156,7 @@
                         </form>
 
                         <!-- modal hapus -->
-                        <div class="modal fade" id="hapus_transaksi_<?php echo $d['transaksi_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="hapus_transaksi_<?php echo $d['input_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -177,7 +172,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <a href="tambah_hapus.php?id=<?php echo $d['transaksi_id'] ?>" class="btn btn-primary">Hapus</a>
+                                <a href="tambah_hapus.php?id=<?php echo $d['input_id'] ?>" class="btn btn-primary">Hapus</a>
                               </div>
                             </div>
                           </div>

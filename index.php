@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Character Showcase Gallery</title>
+        <title>Badan Usaha Milik Desa Sidomukti Kedawung</title>
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Figtree&display=swap");
 
