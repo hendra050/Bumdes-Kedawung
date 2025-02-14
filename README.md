@@ -1,2 +1,1 @@
-helo
-bapakku garena
+helo mode paka
