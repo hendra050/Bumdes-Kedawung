@@ -44,7 +44,7 @@
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['user_nama']; ?></td>
+                      <td><?php echo $d['user_nama']; ?></td> 
                       <td><?php echo $d['user_username']; ?></td>
                       <td><?php echo $d['user_level']; ?></td>
                       <td>

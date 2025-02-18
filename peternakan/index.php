@@ -15,24 +15,22 @@
 
 
   <section class="content">
-
+    
     <div class="row">
-
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-green">
           <div class="inner">
             <?php 
-            $tanggal = date('Y-m-d');
-            $pemasukan = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pemasukan FROM transaksi WHERE transaksi_jenis='Pemasukan' and transaksi_tanggal='$tanggal'");
-            $p = mysqli_fetch_assoc($pemasukan);
+            $penjualan_minggu_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM out_pertashop WHERE YEARWEEK(output_tanggal, 1) = YEARWEEK(CURDATE(), 1)");
+            $m = mysqli_fetch_assoc($penjualan_minggu_ini);
             ?>
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pemasukan'])." ,-" ?></h4>
-            <p>Pemasukan Hari Ini</p>
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($m['total_penjualan'] ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Minggu Ini</p>
           </div>
           <div class="icon">
-            <i class="ion ion-stats-bars"></i>
+              <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -40,111 +38,109 @@
         <div class="small-box bg-blue">
           <div class="inner">
             <?php 
-            $bulan = date('m');
-            $pemasukan = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pemasukan FROM transaksi WHERE transaksi_jenis='Pemasukan' and month(transaksi_tanggal)='$bulan'");
-            $p = mysqli_fetch_assoc($pemasukan);
+            $penjualan_bulan_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM out_pertashop WHERE YEAR(output_tanggal) = YEAR(CURDATE()) AND MONTH(output_tanggal) = MONTH(CURDATE())");
+            $b = mysqli_fetch_assoc($penjualan_bulan_ini);
             ?>
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pemasukan'])." ,-" ?></h4>
-            <p>Pemasukan Bulan Ini</p>
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($b['total_penjualan'] ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Bulan Ini</p>
           </div>
           <div class="icon">
-            <i class="ion ion-stats-bars"></i>
+              <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
       <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-orange">
+        <div class="small-box bg-red">
           <div class="inner">
             <?php 
-            $tahun = date('Y');
-            $pemasukan = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pemasukan FROM transaksi WHERE transaksi_jenis='Pemasukan' and year(transaksi_tanggal)='$tahun'");
-            $p = mysqli_fetch_assoc($pemasukan);
+            $penjualan_semester_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM out_pertashop WHERE YEAR(output_tanggal) = YEAR(CURDATE()) AND 
+            ((MONTH(output_tanggal) BETWEEN 1 AND 6 AND MONTH(CURDATE()) BETWEEN 1 AND 6) 
+            OR (MONTH(output_tanggal) BETWEEN 7 AND 12 AND MONTH(CURDATE()) BETWEEN 7 AND 12))");
+            $s = mysqli_fetch_assoc($penjualan_semester_ini);
             ?>
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pemasukan'])." ,-" ?></h4>
-            <p>Pemasukan Tahun Ini</p>
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($s['total_penjualan'] ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Semester Ini</p>
           </div>
           <div class="icon">
-            <i class="ion ion-stats-bars"></i>
+              <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-black">
+            <div class="inner">
+                <?php 
+                $penjualan_tahun_ini = mysqli_query($koneksi, "SELECT sum(output_total) as total_penjualan FROM out_pertashop WHERE YEAR(output_tanggal) = YEAR(CURDATE())");
+                $p = mysqli_fetch_assoc($penjualan_tahun_ini);
+                ?>
+                <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($p['total_penjualan'] ?? 0) . " ,-" ?></h4>
+                <p>Penjualan Tahun Ini</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
+
+
+<!-- pengeluaran -->
+
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-green">
           <div class="inner">
             <?php 
-            $pemasukan = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pemasukan FROM transaksi WHERE transaksi_jenis='Pemasukan'");
-            $p = mysqli_fetch_assoc($pemasukan);
+            $pengeluaran_minggu_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEARWEEK(opex_tanggal, 1) = YEARWEEK(CURDATE(), 1)");
+            $m = mysqli_fetch_assoc($pengeluaran_minggu_ini);
             ?>
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pemasukan'])." ,-" ?></h4>
-            <p>Seluruh Pemasukan</p>
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($m['total_pengeluaran'] ?? 0) . " ,-" ?></h4>
+            <p>Pengeluaran Minggu Ini</p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
-
       
-
       <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-red">
+        <div class="small-box bg-blue">
           <div class="inner">
             <?php 
-            $tanggal = date('Y-m-d');
-            $pengeluaran = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pengeluaran FROM transaksi WHERE transaksi_jenis='pengeluaran' and transaksi_tanggal='$tanggal'");
-            $p = mysqli_fetch_assoc($pengeluaran);
+            $pengeluaran_bulan_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEAR(opex_tanggal) = YEAR(CURDATE()) AND MONTH(opex_tanggal) = MONTH(CURDATE())");
+            $b = mysqli_fetch_assoc($pengeluaran_bulan_ini);
             ?>
-            
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pengeluaran'])." ,-" ?></h4>
-            <p>Pengeluaran Hari Ini</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-red">
-          <div class="inner">
-            <?php 
-            $bulan = date('m');
-            $pengeluaran = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pengeluaran FROM transaksi WHERE transaksi_jenis='pengeluaran' and month(transaksi_tanggal)='$bulan'");
-            $p = mysqli_fetch_assoc($pengeluaran);
-            ?>
-            
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pengeluaran'])." ,-" ?></h4>
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($b['total_pengeluaran'] ?? 0) . " ,-" ?></h4>
             <p>Pengeluaran Bulan Ini</p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
       <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-red">
           <div class="inner">
-            <?php 
-            $tahun = date('Y');
-            $pengeluaran = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pengeluaran FROM transaksi WHERE transaksi_jenis='pengeluaran' and year(transaksi_tanggal)='$tahun'");
-            $p = mysqli_fetch_assoc($pengeluaran);
+          <?php 
+            $pengeluaran_semester_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEAR(opex_tanggal) = YEAR(CURDATE()) AND 
+            ((MONTH(opex_tanggal) BETWEEN 1 AND 6 AND MONTH(CURDATE()) BETWEEN 1 AND 6) 
+            OR (MONTH(opex_tanggal) BETWEEN 7 AND 12 AND MONTH(CURDATE()) BETWEEN 7 AND 12))");
+            $s = mysqli_fetch_assoc($pengeluaran_semester_ini);
             ?>
-            
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pengeluaran'])." ,-" ?></h4>
-            <p>Pengeluaran Tahun Ini</p>
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($s['total_pengeluaran'] ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Semester Ini</p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -152,16 +148,16 @@
         <div class="small-box bg-black">
           <div class="inner">
             <?php 
-            $pengeluaran = mysqli_query($koneksi,"SELECT sum(transaksi_nominal) as total_pengeluaran FROM transaksi WHERE transaksi_jenis='pengeluaran'");
-            $p = mysqli_fetch_assoc($pengeluaran);
+            $pengeluaran_tahun_ini = mysqli_query($koneksi, "SELECT sum(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEAR(opex_tanggal) = YEAR(CURDATE())");
+            $p = mysqli_fetch_assoc($pengeluaran_tahun_ini);
             ?>
-            <h4 style="font-weight: bolder"><?php echo "Rp. ".number_format($p['total_pengeluaran'])." ,-" ?></h4>
-            <p>Seluruh Pengeluaran</p>
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($p['total_pengeluaran'] ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Tahun Ini</p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
           </div>
-          <a href="bank.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
 
@@ -177,7 +173,6 @@
         <div class="nav-tabs-custom">
 
           <ul class="nav nav-tabs pull-right">
-            <!-- <li><a href="#tab2" data-toggle="tab">Pemasukan</a></li> -->
             <li class="active"><a href="#tab1" data-toggle="tab">Pemasukan & Pengeluaran</a></li>
             <li class="pull-left header">Grafik</li>
           </ul>

@@ -6,7 +6,7 @@ $odo_masuk = floatval($_POST['odomasuk']);
 $odo_keluar = floatval($_POST['odokeluar']);
 
 // Hitung odo
-$odo = $odo_keluar - $odo_masuk;
+$odo = $odo_masuk - $odo_keluar;
 
 // Ambil data stok masuk dari tabel in_pertashop
 $query_stok_masuk = "SELECT input_jumlah, input_tanggal FROM in_pertashop ORDER BY input_tanggal DESC LIMIT 1";
@@ -16,7 +16,7 @@ $stok_masuk = $row_stok_masuk['input_jumlah'];
 $tanggal_masuk = $row_stok_masuk['input_tanggal'];
 
 // Ambil data stok keluar dari tabel out_pertashop
-$query_stok_keluar = "SELECT output_jual AS total_keluar FROM out_pertashop WHERE output_tanggal >= '$tanggal_masuk' ORDER BY output_tanggal DESC LIMIT 1";
+$query_stok_keluar = "SELECT output_jual AS total_keluar FROM out_pertashop WHERE output_tanggal = '$tanggal_masuk' ORDER BY output_tanggal DESC LIMIT 1";
 $result_stok_keluar = mysqli_query($koneksi, $query_stok_keluar) or die(mysqli_error($koneksi));
 $row_stok_keluar = mysqli_fetch_assoc($result_stok_keluar);
 $stok_keluar = $row_stok_keluar['total_keluar'];

@@ -24,4 +24,3 @@ if($filename == ""){
 		header("location:user.php");
 	}
 }
-

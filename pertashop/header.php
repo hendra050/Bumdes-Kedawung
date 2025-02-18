@@ -113,28 +113,15 @@
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
-
+        
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
-
+          
           <li>
             <a href="index.php">
               <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
             </a>
           </li>
-
-          <li>
-            <a href="pemasukan.php">
-              <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="pengeluaran.php">
-              <i class="fa fa-circle-o"> </i> <span>Pengeluaran</span>
-            </a>
-          </li>
-          
           <li class="treeview">
             <a href="#">
               <i class="fa fa-th-list"></i>
@@ -149,10 +136,28 @@
               <li><a href="harga.php"><i class="fa fa-usd"></i> <span>Update Harga</span></a></li>
             </ul>
           </li>
+
+          <li>
+            <a href="pemasukan.php">
+              <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="pengeluaran.php">
+              <i class="fa fa-circle-o"> </i> <span>Pengeluaran</span>
+            </a>
+          </li>
+          
           
           <li>
             <a href="kategori.php">
               <i class="fa fa-circle-o"> </i> <span>Kategori Pengeluaran</span>
+            </a>
+          </li>
+          <li>
+            <a href="asset.php">
+              <i class="fa fa-circle-o"> </i> <span>Asset Perta</span>
             </a>
           </li>
 

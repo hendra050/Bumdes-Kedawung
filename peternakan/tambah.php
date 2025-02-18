@@ -4,8 +4,8 @@
 
   <section class="content-header">
     <h1>
-      Data Omset
-      <small>pemasukan</small>
+      Tambah Stok
+      <small>Data Stok</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -19,34 +19,46 @@
         <div class="box box-info">
 
           <div class="box-header">
-            <h3 class="box-title">Omset</h3>
+            <h3 class="box-title">Penambahan Stok</h3>
             <div class="btn-group pull-right">            
               <a href="import_transaksi.php"><button type="button" class="btn btn-success btn-sm">
-                <i class="fa fa-file-excel-o"></i> &nbsp Import Pemasukan
+                <i class="fa fa-file-excel-o"></i> &nbsp Import Transaksi
               </button></a>
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa fa-plus"></i> &nbsp Tambah Pemaasukan
+                <i class="fa fa-plus"></i> &nbsp Tambah Transaksi
               </button>
             </div>
           </div>
           <div class="box-body">
 
             <!-- Modal -->
-            <form action="pemasukan_act.php" method="post" enctype="multipart/form-data">
+            <form action="tambah_act.php" method="post" enctype="multipart/form-data">
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title" id="exampleModalLabel">Tambah Pemasukan</h4>
+                      <h4 class="modal-title" id="exampleModalLabel">Tambah Transaksi</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>Jumlah</label>
+                        <input type="number" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah .." step="0.01" min="0">
+                      </div>
+
                       <div class="form-group">
-                        <label>Penjualan</label>
-                        <input type="number" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan Hari Ini .." step="0.01" min="0">
-                        </div>
+                        <label>Harga/liter</label>
+                        <input type="number" name="harga" required="required" class="form-control" placeholder="Masukkan Harga ..">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" name="foto" accept="image/">
+                      </div>
+
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -62,52 +74,51 @@
               <table class="table table-bordered table-striped" id="table-datatable">
                 <thead>
                   <tr>
-                    <th width="1%" rowspan="2">NO</th>
-                    <th width="10%" class="text-center" rowspan="2">TANGGAL</th>
-                    <th width="40%" class="text-center" colspan="3">SHIFT</th>
-                    <th class="text-center" rowspan="2">HARGA</th>
-                    <th class="text-center" rowspan="2">TOTAL</th>
-                    <th width="10%" class="text-center" rowspan="2">OPSI</th>
-                  </tr>
-                  <tr>
-                    <th class="text-center">PAGI</th>
-                    <th class="text-center">SIANG</th>
-                    <th class="text-center">FULL DAY</th>
+                    <th width="1%">NO</th>
+                    <th width="10%" class="text-center">TANGGAL</th>
+                    <th class="text-center">JUMLAH</th>
+                    <th class="text-center">HARGA POKOK PENJUALAN</th>
+                    <th class="text-center">TOTAL HARGA</th>
+                    <th class="text-center">FOTO</th>
+                    <th width="10%" class="text-center">OPSI</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php   
+                  <?php 
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi, "SELECT * FROM out_pertashop order by output_tanggal desc");
+                  $data = mysqli_query($koneksi, "SELECT * FROM in_pertashop ");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
-                      <td class="text-center"><?php echo $d['output_tanggal']; ?></td>
-                      
-                      <td class="text-center"><?php echo ($d['shift'] == "pagi") ? $d['output_jual'] . " liter" : "-"; ?></td>
-                      <td class="text-center"><?php echo ($d['shift'] == "siang") ? $d['output_jual'] . " liter" : "-"; ?></td>
-                      <td class="text-center"><?php echo ($d['shift'] == "fullday") ? $d['output_jual'] . " liter" : "-"; ?></td>
-
-                      <td class="text-center"><?php echo "Rp. ".number_format($d['harga'])." ,-" ?></td>
-                      <td class="text-center"><?php echo "Rp. ".number_format($d['output_total'])." ,-" ?></td>
-                      <td class="text-center">    
-                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_output_<?php echo $d['output_id'] ?>">
+                      <td class="text-center"><?php echo $d['input_tanggal']; ?></td>
+                      <td><?php echo $d['input_jumlah']; ?></td>
+                      <td><?php echo "Rp. ".number_format($d['input_perliter'])." ,-" ?></td>
+                      <td><?php echo "Rp. ".number_format($d['input_harga'])." ,-" ?></td>
+                      <td>
+                      <?php if($d['input_foto'] == ""){ ?>
+                            <img src="../gambar/sistem/user.png" style="width: 80px;height: auto">
+                          <?php }else{ ?>
+                            <img src="../gambar/user/<?php echo $d['input_foto'] ?>" style="width: 80px;height: auto">
+                          <?php } ?>
+                      </td>
+                      <td>    
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_transaksi_<?php echo $d['input_id'] ?>">
                           <i class="fa fa-cog"></i>
                         </button>
 
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_output_<?php echo $d['output_id'] ?>">
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_transaksi_<?php echo $d['input_id'] ?>">
                           <i class="fa fa-trash"></i>
                         </button>
 
 
-                        <form action="pemasukan_update.php" method="post">
-                          <div class="modal fade" id="edit_output_<?php echo $d['output_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <form action="tambah_update.php" method="post">
+                          <div class="modal fade" id="edit_transaksi_<?php echo $d['input_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h4 class="modal-title" id="exampleModalLabel">Edit output</h4>
+                                  <h4 class="modal-title" id="exampleModalLabel">Edit transaksi</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -116,14 +127,23 @@
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Tanggal</label>
-                                    <input type="hidden" name="id" value="<?php echo $d['output_id'] ?>">
-                                    <input type="text" style="width:100%" name="tanggal" required="required" class="form-control datepicker2" value="<?php echo $d['output_tanggal'] ?>">
+                                    <input type="hidden" name="id" value="<?php echo $d['input_id'] ?>">
+                                    <input type="text" style="width:100%" name="tanggal" required="required" class="form-control datepicker2" value="<?php echo $d['input_tanggal'] ?>">
                                   </div>
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
-                                    <label>Penjualan </label>
-                                    <input type="number" style="width:100%" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan hari ini .." value="<?php echo $d['output_jual']; ?>" step="0.01" min="0">
-                                    </div>
+                                    <label>Jumlah</label>
+                                    <input type="number" style="width:100%" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah .." value="<?php echo $d['input_jumlah'] ?>" step="0.01" min="0">
+                                  </div>
+
+                                  <div class="form-group" style="width:100%;margin-bottom:20px">
+                                    <label>Harga/liter</label>
+                                    <input type="number" style="width:100%" name="harga" required="required" class="form-control" placeholder="Masukkan Harga .." value="<?php echo $d['input_perliter'] ?>">
+                                  </div>
+
+                                  <label>Foto</label>
+                                    <input type="file" name="foto" >
+                                  </div>
 
                                 </div>
                                 <div class="modal-footer">
@@ -136,7 +156,7 @@
                         </form>
 
                         <!-- modal hapus -->
-                        <div class="modal fade" id="hapus_output_<?php echo $d['output_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="hapus_transaksi_<?php echo $d['input_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -152,7 +172,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <a href="pemasukan_hapus.php?id=<?php echo $d['output_id'] ?>" class="btn btn-primary">Hapus</a>
+                                <a href="tambah_hapus.php?id=<?php echo $d['input_id'] ?>" class="btn btn-primary">Hapus</a>
                               </div>
                             </div>
                           </div>

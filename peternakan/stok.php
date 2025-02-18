@@ -94,10 +94,10 @@
                       </td>
                       <td class="text-center"><?php echo $d['stok_keluar'];?> liter</td>
                       <td class="text-center"><?php echo $d['stok_sisa'];?> liter</td>
-                      <td class="text-center"><?php echo $d['odo_masuk'];?> </td>
-                      <td class="text-center"><?php echo $d['odo_keluar'];?> </td>
-                      <td class="text-center"><?php echo $d['odo'];?> </td>
-                      <td class="text-center"><?php echo $d['penguapan'];?> </td>
+                      <td class="text-center"><?php echo $d['odo_masuk'];?> liter</td>
+                      <td class="text-center"><?php echo $d['odo_keluar'];?> liter</td>
+                      <td class="text-center"><?php echo $d['odo'];?> liter</td>
+                      <td class="text-center"><?php echo $d['penguapan'];?> liter</td>
                     </tr>
                     <?php 
                   }

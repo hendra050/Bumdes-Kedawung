@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Administrator - Sistem Informasi Manajemen Keuangan</title>
+  <title>Pertashop - Sistem Informasi Manajemen Keuangan</title>
   <link rel="shortcut icon" href="/simk/gambar/sistem/logo-bumdes.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -43,8 +43,14 @@
       border: 1px solid #f4f4f4;
     }
 
-    .navbar-static-top{
-      background-color:rgb(254, 0, 0);
+    .skin-blue .main-header .navbar {
+      background-color:#5cb85c;
+    }
+
+    .skin-blue .main-header .logo {
+      background-color:#4cae4c;
+      color: #fff;
+      border-bottom: 0 solid transparent;
     }
   </style>
   <div class="wrapper">
@@ -52,7 +58,7 @@
     <header class="main-header">
       <a href="index.php" class="logo">
         <span class="logo-mini"><b><i class="fa fa-money"></i></b> </span>
-        <span class="logo-lg"><b>SIMK BUMDes</b></span>
+        <span class="logo-lg"><b>SIMK Peternakan</b></span>
       </a>
       <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -110,63 +116,43 @@
 
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
-
+          
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-th-list"></i>
+              <span>Status Stok</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="tambah.php"><i class="fa fa-plus"></i> <span>Penambahan Stok</span></a></li>
+              <li><a href="stok.php"><i class="fa fa-database"></i> <span>Sisa Stok</span></a></li>
+              <li><a href="harga.php"><i class="fa fa-usd"></i> <span>Update Harga</span></a></li>
+            </ul>
+          </li>
           <li>
             <a href="index.php">
               <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
             </a>
           </li>
+          
+          <li>
+            <a href="pemasukan.php">
+              <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>
+            </a>
+          </li>
 
+          <li>
+            <a href="pengeluaran.php">
+              <i class="fa fa-circle-o"> </i> <span>Pengeluaran</span>
+            </a>
+          </li>
+          
+          
           <li>
             <a href="kategori.php">
-              <i class="fa fa-folder"></i> <span>Unit Usaha</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="kategori.php">
-              <i class="fa fa-folder"></i> <span>Data Kategori</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="transaksi.php">
-              <i class="fa fa-folder"></i> <span>Data Transaksi</span>
-            </a>
-          </li>
-
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-hand-paper-o"></i>
-              <span>Hutang/Piutang</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="hutang.php"><i class="fa fa-circle-o"></i> Catatan Hutang</a></li>
-              <li><a href="piutang.php"><i class="fa fa-circle-o"></i> Catatan Piutang</a></li>
-            </ul>
-          </li>
-
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-dollar"></i>
-              <span>Rincian Transaksi</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="transaksi_bsi.php"><i class="fa fa-circle-o"></i> BANK BSI</a></li>
-              <li><a href="transaksi_bca.php"><i class="fa fa-circle-o"></i> BANK BCA</a></li>
-              <li><a href="transaksi_cash.php"><i class="fa fa-circle-o"></i> CASH</a></li>
-            </ul>
-          </li>
-
-          <li>
-            <a href="bank.php">
-              <i class="fa fa-building"></i> <span>Rekening Bank</span>
+              <i class="fa fa-circle-o"> </i> <span>Kategori Pengeluaran</span>
             </a>
           </li>
 
@@ -183,20 +169,6 @@
               <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Arus Kas</a></li>
               <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Neraca</a></li>
               <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Perubahan Modal</a></li>
-            </ul>
-          </li>
-
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-users"></i>
-              <span>Data Pengguna</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="user.php"><i class="fa fa-circle-o"></i> Data Pengguna</a></li>
-              <li><a href="user_tambah.php"><i class="fa fa-circle-o"></i> Tambah Pengguna</a></li>
             </ul>
           </li>
 
