@@ -22,15 +22,15 @@
             <h3 class="box-title">Asset Pertashop</h3>
             <div class="btn-group pull-right">            
 
-              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
+              <!-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> &nbsp Tambah Kategori
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="box-body">
 
             <!-- Modal -->
-            <form action="asset_act.php" method="post">
+            <!-- <form action="asset_act.php" method="post">
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -55,7 +55,7 @@
                   </div>
                 </div>
               </div>
-            </form>
+            </form> -->
 
 
             <div class="table-responsive">
@@ -63,7 +63,9 @@
                 <thead>
                   <tr>
                     <th width="1%">NO</th>
+                    <th>TANGGAL</th>
                     <th>NAMA</th>
+                    <th>NOMINAL</th>
                     <th width="10%">OPSI</th>
                   </tr>
                 </thead>
@@ -76,7 +78,9 @@
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
+                      <td width="20%"><?php echo $d['opex_tanggal']; ?></td>
                       <td><?php echo ($d['opex_kategori'] == "6") ? $d['opex_keterangan'] : "-"; ?></td>
+                      <td><?php echo "Rp. ".number_format($d['opex_nominal'])." ,-" ?></td>
                       <td>    
                         <?php 
                         if($d['opex_id'] != 1){

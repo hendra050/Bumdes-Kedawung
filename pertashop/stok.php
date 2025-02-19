@@ -66,13 +66,13 @@
                     <th class="text-center" rowspan="2">STOK AWAL</th>
                     <th class="text-center" rowspan="2">STOK MASUK</th>
                     <th class="text-center" rowspan="2">STOK KELUAR</th>
-                    <th class="text-center" rowspan="2">STOK SISA</th>
-                    <th class="text-center" colspan="3">ODOMETER</th>
+                    <th class="text-center" colspan="3">MANUAL</th>
                     <th class="text-center" rowspan="2">PENGUAPAN</th>
+                    <th class="text-center" rowspan="2">STOK SISA</th>
                   </tr>
                   <tr>
-                    <th class="text-center">MASUK</th>
-                    <th class="text-center">KELUAR</th>
+                    <th class="text-center">AWAL</th>
+                    <th class="text-center">AKHIR</th>
                     <th class="text-center">SELISIH</th>
                   </tr>
                 </thead>
@@ -86,12 +86,8 @@
                     ?>
                     <tr>
                       <td class="text-center" width="10%" ><?php echo $d['tanggal_masuk'];?></td>
-                      <td class="text-center">
-                      <?php echo ($d['stok_awal'] == "0") ? "-" : $d['stok_awal'] . " liter"; ?>
-                      </td>
-                      <td class="text-center">
-                        <?php echo ($d['stok_masuk'] == "0") ? "-" : $d['stok_masuk'] . " liter"; ?>
-                      </td>
+                      <td class="text-center"><?php echo ($d['stok_awal'] == "0") ? "-" : $d['stok_awal'] . " liter"; ?></td>
+                      <td class="text-center"><?php echo ($d['stok_masuk'] == "0") ? "-" : $d['stok_masuk'] . " liter"; ?></td>
                       <td class="text-center"><?php echo $d['stok_keluar'];?> liter</td>
                       <td class="text-center"><?php echo $d['stok_sisa'];?> liter</td>
                       <td class="text-center"><?php echo $d['odo_masuk'];?> </td>

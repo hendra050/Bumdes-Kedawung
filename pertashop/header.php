@@ -183,11 +183,11 @@
             </a>
           </li>
 
-          <li>
+          <!-- <li>
             <a href="logout.php" onclick="return confirm('Apakah Anda yakin untuk logout?')">
               <i class="fa fa-sign-out"></i> <span>LOGOUT</span>
             </a>
-          </li>
+          </li> -->
 
         </ul>
       </section>

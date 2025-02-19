@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2025 at 07:29 AM
+-- Generation Time: Feb 19, 2025 at 05:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `hj_pertashop` (
   `harga_id` int(11) NOT NULL,
-  `harga_tanggal` date NOT NULL DEFAULT current_timestamp(),
+  `harga_tanggal` timestamp NOT NULL DEFAULT current_timestamp(),
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,10 +38,7 @@ CREATE TABLE `hj_pertashop` (
 --
 
 INSERT INTO `hj_pertashop` (`harga_id`, `harga_tanggal`, `harga`) VALUES
-(1, '2025-01-20', 12000),
-(2, '2025-01-22', 15000),
-(9, '2025-01-22', 10000),
-(10, '2025-01-22', 11000);
+(12, '2025-02-13 12:28:45', 11000);
 
 -- --------------------------------------------------------
 
@@ -64,8 +61,8 @@ CREATE TABLE `hutang` (
 
 CREATE TABLE `in_pertashop` (
   `input_id` int(11) NOT NULL,
-  `input_tanggal` date NOT NULL,
-  `input_jumlah` int(11) NOT NULL,
+  `input_tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `input_jumlah` decimal(11,2) NOT NULL,
   `input_perliter` int(11) NOT NULL,
   `input_harga` int(11) NOT NULL,
   `input_foto` varchar(100) DEFAULT NULL
@@ -76,10 +73,7 @@ CREATE TABLE `in_pertashop` (
 --
 
 INSERT INTO `in_pertashop` (`input_id`, `input_tanggal`, `input_jumlah`, `input_perliter`, `input_harga`, `input_foto`) VALUES
-(1, '2025-01-22', 10, 2000000, 20000000, '517010551_centang.png'),
-(2, '2025-01-22', 5, 500000, 2500000, ''),
-(3, '2025-01-27', 2000, 15000, 30000000, ''),
-(4, '2025-02-06', 100, 15000, 1500000, '');
+(10, '2025-02-17 08:43:55', 2000.00, 10000, 20000000, '');
 
 -- --------------------------------------------------------
 
@@ -118,7 +112,8 @@ CREATE TABLE `kategori_pertashop` (
 INSERT INTO `kategori_pertashop` (`kategori_id`, `kategori`) VALUES
 (1, 'listrik'),
 (2, 'Tagihan Air'),
-(3, 'Tagihan Wifi');
+(3, 'Tagihan Wifi'),
+(6, 'Asset');
 
 -- --------------------------------------------------------
 
@@ -128,7 +123,7 @@ INSERT INTO `kategori_pertashop` (`kategori_id`, `kategori`) VALUES
 
 CREATE TABLE `opex_pertashop` (
   `opex_id` int(11) NOT NULL,
-  `opex_tanggal` date NOT NULL,
+  `opex_tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `opex_kategori` varchar(50) NOT NULL,
   `opex_keterangan` varchar(150) NOT NULL,
   `opex_nominal` int(11) NOT NULL
@@ -139,12 +134,9 @@ CREATE TABLE `opex_pertashop` (
 --
 
 INSERT INTO `opex_pertashop` (`opex_id`, `opex_tanggal`, `opex_kategori`, `opex_keterangan`, `opex_nominal`) VALUES
-(1, '2025-02-04', '1', 'listrik', 400000),
-(2, '2025-02-04', '18', 'anu', 10000),
-(3, '2025-02-04', '2', 'anadgefg', 400000),
-(4, '2025-02-04', '3', 'fghrfgh', 600000),
-(5, '2025-02-04', '2', 'xfgchdgth', 500000),
-(6, '2025-02-04', '1', 'p', 500000);
+(14, '2025-02-17 09:46:12', '6', 'kursi', 15000),
+(15, '2025-02-17 10:12:44', '6', 'meja', 20000),
+(16, '2025-02-18 08:26:18', '6', 'meja', 10000);
 
 -- --------------------------------------------------------
 
@@ -154,26 +146,19 @@ INSERT INTO `opex_pertashop` (`opex_id`, `opex_tanggal`, `opex_kategori`, `opex_
 
 CREATE TABLE `out_pertashop` (
   `output_id` int(11) NOT NULL,
-  `output_tanggal` date NOT NULL,
-  `output_jual` int(11) NOT NULL,
+  `output_tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `output_jual` decimal(10,2) DEFAULT NULL,
   `harga` int(11) NOT NULL,
-  `output_total` int(15) NOT NULL
+  `output_total` int(15) NOT NULL,
+  `shift` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `out_pertashop`
 --
 
-INSERT INTO `out_pertashop` (`output_id`, `output_tanggal`, `output_jual`, `harga`, `output_total`) VALUES
-(3, '2025-01-22', 2, 15000, 30000),
-(5, '2025-01-22', 2, 15000, 30000),
-(7, '2025-02-12', 0, 11000, 0),
-(8, '2025-01-22', 6, 12000, 72000),
-(9, '2025-01-27', 50, 11000, 550000),
-(10, '2025-02-04', 150, 11000, 1650000),
-(11, '2025-02-05', 400, 11000, 4400000),
-(12, '2025-02-06', 500, 11000, 5500000),
-(13, '2025-01-06', 50, 11000, 550000);
+INSERT INTO `out_pertashop` (`output_id`, `output_tanggal`, `output_jual`, `harga`, `output_total`, `shift`) VALUES
+(42, '2025-02-17 09:00:06', 100.00, 11000, 1100000, 'siang');
 
 -- --------------------------------------------------------
 
@@ -196,15 +181,15 @@ CREATE TABLE `piutang` (
 
 CREATE TABLE `stok_pertashop` (
   `stok_id` int(11) NOT NULL,
-  `stok_awal` float DEFAULT NULL,
-  `stok_masuk` float DEFAULT NULL,
-  `stok_keluar` float NOT NULL,
-  `stok_sisa` int(11) NOT NULL,
+  `stok_awal` decimal(11,2) DEFAULT NULL,
+  `stok_masuk` decimal(11,2) DEFAULT NULL,
+  `stok_keluar` decimal(11,2) NOT NULL,
+  `stok_sisa` decimal(11,2) NOT NULL,
   `tanggal_masuk` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `odo_masuk` int(11) NOT NULL,
-  `odo_keluar` int(11) NOT NULL,
-  `penguapan` int(11) NOT NULL,
-  `odo` int(11) NOT NULL
+  `odo_masuk` decimal(11,2) NOT NULL,
+  `odo_keluar` decimal(11,2) NOT NULL,
+  `penguapan` decimal(11,2) NOT NULL,
+  `odo` decimal(11,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -212,23 +197,7 @@ CREATE TABLE `stok_pertashop` (
 --
 
 INSERT INTO `stok_pertashop` (`stok_id`, `stok_awal`, `stok_masuk`, `stok_keluar`, `stok_sisa`, `tanggal_masuk`, `odo_masuk`, `odo_keluar`, `penguapan`, `odo`) VALUES
-(2, NULL, 10, 8, 2, '0000-00-00 00:00:00', 0, 0, 0, 0),
-(3, NULL, 10, 8, 2, '2025-01-21 17:00:00', 0, 0, 0, 0),
-(4, NULL, 10, 10, 2, '2025-01-21 17:00:00', 0, 0, 0, 0),
-(5, NULL, 10, 10, 2, '2025-01-21 17:00:00', 0, 0, 0, 0),
-(6, NULL, 2000, 50, 1950, '2025-01-26 17:00:00', 0, 0, 0, 0),
-(7, NULL, 2000, 50, 1950, '2025-01-26 17:00:00', 0, 0, 0, 0),
-(8, NULL, 2000, 50, 1950, '2025-01-26 17:00:00', 0, 0, 0, 0),
-(9, NULL, 2000, 50, 1950, '2025-01-26 17:00:00', 0, 0, 0, 0),
-(10, NULL, 2000, 200, 1800, '2025-01-26 17:00:00', 0, 0, 0, 0),
-(11, NULL, 2000, 600, 1400, '2025-01-26 17:00:00', 0, 0, 0, 0),
-(12, NULL, 100, 0, 100, '2025-02-05 17:00:00', 0, 0, 0, 0),
-(13, NULL, 100, 500, -300, '2025-02-05 17:00:00', 0, 0, 0, 0),
-(14, NULL, 100, 500, -700, '2025-02-05 17:00:00', 0, 0, 500, 0),
-(15, 0, 100, 500, -1100, '0000-00-00 00:00:00', 1000, 400, 1700, 600),
-(16, 0, 100, 500, -300, '0000-00-00 00:00:00', 1000, 400, 100, 600),
-(17, 0, 100, 500, -300, '0000-00-00 00:00:00', 1000, 400, 100, 600),
-(18, 100, 100, 500, -300, '0000-00-00 00:00:00', 1000, 700, -200, 300);
+(43, 2000.00, 0.00, 100.00, 1900.00, '2025-02-17 09:03:56', 0.00, 150.00, 50.00, 150.00);
 
 -- --------------------------------------------------------
 
@@ -360,7 +329,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `hj_pertashop`
 --
 ALTER TABLE `hj_pertashop`
-  MODIFY `harga_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `harga_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `hutang`
@@ -372,7 +341,7 @@ ALTER TABLE `hutang`
 -- AUTO_INCREMENT for table `in_pertashop`
 --
 ALTER TABLE `in_pertashop`
-  MODIFY `input_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `input_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -384,19 +353,19 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `kategori_pertashop`
 --
 ALTER TABLE `kategori_pertashop`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `opex_pertashop`
 --
 ALTER TABLE `opex_pertashop`
-  MODIFY `opex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `opex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `out_pertashop`
 --
 ALTER TABLE `out_pertashop`
-  MODIFY `output_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `output_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `piutang`
@@ -408,7 +377,7 @@ ALTER TABLE `piutang`
 -- AUTO_INCREMENT for table `stok_pertashop`
 --
 ALTER TABLE `stok_pertashop`
-  MODIFY `stok_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `stok_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
