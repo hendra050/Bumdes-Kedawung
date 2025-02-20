@@ -5,7 +5,7 @@ include '../koneksi.php';
 $id = $_GET['id'];
 
 // Ambil data transaksi untuk mendapatkan informasi foto (jika ada)
-$transaksi = mysqli_query($koneksi, "SELECT * FROM in_pertashop WHERE input_id='$id'");
+$transaksi = mysqli_query($koneksi, "SELECT * FROM do_pertashop WHERE input_id='$id'");
 $t = mysqli_fetch_assoc($transaksi);
 
 // Hapus foto dari folder jika ada
@@ -17,7 +17,7 @@ if ($t['foto'] != "") {
 }
 
 // Hapus data transaksi dari database
-mysqli_query($koneksi, "DELETE FROM in_pertashop WHERE input_id='$id'");
+mysqli_query($koneksi, "DELETE FROM do_pertashop WHERE input_id='$id'");
 
 // Redirect ke halaman transaksi
 header("location:tambah.php");

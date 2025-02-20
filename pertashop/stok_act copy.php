@@ -1,13 +1,6 @@
 <?php
 include '../koneksi.php';
 
-// Ambil data dari form
-$manual_awal = floatval($_POST['manual_awal']); // Input manual awal dari form
-$manual_akhir = floatval($_POST['manual_akhir']); // Input manual akhir dari form
-
-// Hitung manual_selisih
-$manual_selisih = $manual_awal - $manual_akhir;
-
 // Ambil data stok masuk dari tabel in_pertashop
 $query_stok_masuk = "SELECT input_jumlah, input_tanggal FROM do_pertashop ORDER BY input_tanggal DESC LIMIT 1";
 $result_stok_masuk = mysqli_query($koneksi, $query_stok_masuk) or die(mysqli_error($koneksi));
@@ -40,12 +33,10 @@ if ($jumlah_data > 0) {
 }
 
 // Hitung stok sisa
-$sisa_baru = $stok_sisa_sebelumnya + $stok_masuk - $stok_keluar;
-
-$penguapan = $manual_selisih - $stok_keluar;
 
 // Simpan data stok sisa ke tabel stok_pertashop
-$insert_query = "INSERT INTO stok_pertashop (`stok_awal`, `stok_masuk`, `stok_keluar`, `stok_sisa`, `tanggal_masuk`, `manual_awal`, `manual_akhir`, `manual_selisih`, `penguapan`) VALUES ('$stok_sisa_sebelumnya', '$stok_masuk', '$stok_keluar', '$sisa_baru', NOW(), '$manual_awal', '$manual_akhir', '$manual_selisih', '$penguapan')";
+$insert_query = "INSERT INTO stok_pertashop (stok_awal, stok_masuk, tanggal_masuk, stok_keluar, stok_sisa)
+                VALUES ('$stok_sisa_sebelumnya', '$stok_masuk', NOW(), '$stok_keluar', '$sisa_baru')";
 mysqli_query($koneksi, $insert_query) or die(mysqli_error($koneksi));
 
 header("location:stok.php");

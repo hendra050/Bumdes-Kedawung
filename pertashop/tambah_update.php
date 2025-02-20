@@ -1,6 +1,10 @@
 <?php 
 include '../koneksi.php';
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 // Ambil data dari form
 $id = $_POST['id']; // ID tambah yang akan diupdate
 $tanggal  = $_POST['tanggal'];
@@ -21,7 +25,7 @@ $filename = $_FILES['foto']['name'];
 
 // Cek jika file tidak diupload
 if($filename == ""){
-	mysqli_query($koneksi, "UPDATE in_pertashop SET input_tanggal='$tanggal', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga' WHERE input_id='$id'");
+	mysqli_query($koneksi, "UPDATE do_pertashop SET input_tanggal='$tanggal', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga' WHERE input_id='$id'");
 	header("location:tambah.php");
 }else{
 	// Ambil ekstensi file yang diupload
@@ -38,7 +42,7 @@ if($filename == ""){
 		$file_gambar = $rand.'_'.$filename;
 
 		// Simpan data ke database
-		mysqli_query($koneksi, "UPDATE in_pertashop SET input_tanggal='$tanggal', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga', input_foto='$file_gambar' WHERE input_id='$id'");
+		mysqli_query($koneksi, "UPDATE do_pertashop SET input_tanggal='$tanggal', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga', input_foto='$file_gambar' WHERE input_id='$id'");
 		header("location:tambah.php");
 	}
 }

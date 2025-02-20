@@ -87,7 +87,7 @@
                   <?php 
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi, "SELECT * FROM in_pertashop ");
+                  $data = mysqli_query($koneksi, "SELECT * FROM do_pertashop ");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
@@ -142,7 +142,7 @@
                                   </div>
 
                                   <label>Foto</label>
-                                    <input type="file" name="foto" >
+                                    <input type="file" name="foto" accept="image/">
                                   </div>
 
                                 </div>

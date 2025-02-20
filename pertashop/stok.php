@@ -41,12 +41,12 @@
                     </div>
                     <div class="modal-body">
                       <div class="form-group">
-                        <label>Odo Masuk</label>
-                        <input type="number" name="odomasuk" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <label>Perhitungan Manual Awal</label>
+                        <input type="number" name="manual_awal" required="required" class="form-control" placeholder="Masukkan Nominal ..">
                       </div>
                       <div class="form-group">
-                        <label>Odo Keluar</label>
-                        <input type="number" name="odokeluar" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <label>Perhitungan Manual Akhir</label>
+                        <input type="number" name="manual_akhir" required="required" class="form-control" placeholder="Masukkan Nominal ..">
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -66,9 +66,9 @@
                     <th class="text-center" rowspan="2">STOK AWAL</th>
                     <th class="text-center" rowspan="2">STOK MASUK</th>
                     <th class="text-center" rowspan="2">STOK KELUAR</th>
+                    <th class="text-center" rowspan="2">STOK SISA</th>
                     <th class="text-center" colspan="3">MANUAL</th>
                     <th class="text-center" rowspan="2">PENGUAPAN</th>
-                    <th class="text-center" rowspan="2">STOK SISA</th>
                   </tr>
                   <tr>
                     <th class="text-center">AWAL</th>
@@ -90,9 +90,9 @@
                       <td class="text-center"><?php echo ($d['stok_masuk'] == "0") ? "-" : $d['stok_masuk'] . " liter"; ?></td>
                       <td class="text-center"><?php echo $d['stok_keluar'];?> liter</td>
                       <td class="text-center"><?php echo $d['stok_sisa'];?> liter</td>
-                      <td class="text-center"><?php echo $d['odo_masuk'];?> </td>
-                      <td class="text-center"><?php echo $d['odo_keluar'];?> </td>
-                      <td class="text-center"><?php echo $d['odo'];?> </td>
+                      <td class="text-center"><?php echo $d['manual_awal'];?> </td>
+                      <td class="text-center"><?php echo $d['manual_akhir'];?> </td>
+                      <td class="text-center"><?php echo $d['manual_selisih'];?> </td>
                       <td class="text-center"><?php echo $d['penguapan'];?> </td>
                     </tr>
                     <?php 

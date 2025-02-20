@@ -62,7 +62,7 @@
               <table class="table table-bordered table-striped" id="table-datatable">
                 <thead>
                   <tr>
-                    <th width="1%">NO</th>
+                    <th width="1%">NO</th> 
                     <th>TANGGAL</th>
                     <th>NAMA</th>
                     <th>NOMINAL</th>
@@ -72,14 +72,14 @@
                 <tbody>
                   <?php 
                   include '../koneksi.php';
-                  $no=1;
-                  $data = mysqli_query($koneksi,"SELECT * FROM opex_pertashop ORDER BY opex_kategori ASC");
+                  $no = 1;
+                  $data = mysqli_query($koneksi, "SELECT * FROM opex_pertashop WHERE opex_kategori = 1 ORDER BY opex_tanggal desc");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
                       <td width="20%"><?php echo $d['opex_tanggal']; ?></td>
-                      <td><?php echo ($d['opex_kategori'] == "6") ? $d['opex_keterangan'] : "-"; ?></td>
+                      <td><?php echo ($d['opex_kategori'] == "1") ? $d['opex_keterangan'] : "-"; ?></td>
                       <td><?php echo "Rp. ".number_format($d['opex_nominal'])." ,-" ?></td>
                       <td>    
                         <?php 

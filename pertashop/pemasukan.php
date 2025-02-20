@@ -37,16 +37,20 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title" id="exampleModalLabel">Tambah Pemasukan</h4>
+                      <h4 class="modal-title" id="exampleModalLabel">Tambah Transaksi</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
                       <div class="form-group">
-                        <label>Penjualan</label>
-                        <input type="number" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan Hari Ini .." step="0.01" min="0">
-                        </div>
+                        <label>Odo Masuk</label>
+                        <input type="number" name="odomasuk" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                      </div>
+                      <div class="form-group">
+                        <label>Odo Keluar</label>
+                        <input type="number" name="odokeluar" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -82,14 +86,14 @@
                   <?php   
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi, "SELECT * FROM out_pertashop order by output_tanggal desc");
+                  $data = mysqli_query($koneksi, "SELECT * FROM omset_pertashop order by output_tanggal desc");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
                       <td class="text-center"><?php echo $d['output_tanggal']; ?></td>
-                      <td class="text-center"><?php echo ($d['shift'] == "pagi") ? $d['output_jual'] . " liter" : "-"; ?></td>
-                      <td class="text-center"><?php echo ($d['shift'] == "pagi") ? $d['output_jual'] . " liter" : "-"; ?></td>
+                      <td class="text-center"><?php echo $d['odo_masuk']; ?></td>
+                      <td class="text-center"><?php echo $d['odo_keluar']; ?></td>
                       <td class="text-center"><?php echo ($d['shift'] == "pagi") ? $d['output_jual'] . " liter" : "-"; ?></td>
                       <td class="text-center"><?php echo ($d['shift'] == "siang") ? $d['output_jual'] . " liter" : "-"; ?></td>
                       <td class="text-center"><?php echo ($d['shift'] == "fullday") ? $d['output_jual'] . " liter" : "-"; ?></td>
