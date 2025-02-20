@@ -60,9 +60,12 @@ if (mysqli_num_rows($result) > 0) {
         }
     }
 
+    // Generate kode otomatis (401 + 8 angka random)
+    $kode = "MSK-" . str_pad(mt_rand(0, 99999999), 8, '0', STR_PAD_LEFT);
+
     // Insert data ke database
-    $insert_query = "INSERT INTO omset_pertashop (output_tanggal, odo_masuk, odo_keluar, output_jual, harga, output_total, shift)
-                    VALUES (NOW(),'$odo_masuk', '$odo_keluar', '$output_jual',  '$harga', '$total', '$shift')";
+    $insert_query = "INSERT INTO omset_pertashop (output_kode, output_tanggal, odo_masuk, odo_keluar, output_jual, harga, output_total, shift)
+                    VALUES ('$kode', NOW(),'$odo_masuk', '$odo_keluar', '$output_jual',  '$harga', '$total', '$shift')";
     
     mysqli_query($koneksi, $insert_query) or die(mysqli_error($koneksi));
 
@@ -72,5 +75,4 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo "Harga pokok tidak ditemukan. Silakan periksa data harga.";
 }
-
 ?>

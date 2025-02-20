@@ -160,6 +160,11 @@
               <i class="fa fa-circle-o"> </i> <span>Asset Perta</span>
             </a>
           </li>
+          
+          <li>
+            <a href="laporan.php">
+              <i class="fa fa-file-o"></i> Laporan Laba/Rugi</a>
+          </li>
 
           <li class="treeview">
             <a href="#">
@@ -170,7 +175,6 @@
               </span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Laba/Rugi</a></li>
               <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Arus Kas</a></li>
               <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Neraca</a></li>
               <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Perubahan Modal</a></li>

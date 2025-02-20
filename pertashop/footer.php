@@ -102,7 +102,7 @@
       <?php
       for($bulan=1;$bulan<=12;$bulan++){
         $thn_ini = date('Y');
-        $pemasukan = mysqli_query($koneksi,"select sum(output_total) as total_pemasukan from out_pertashop where month(output_tanggal)='$bulan' and year(output_tanggal)='$thn_ini'");
+        $pemasukan = mysqli_query($koneksi,"select sum(output_total) as total_pemasukan from omset_pertashop where month(output_tanggal)='$bulan' and year(output_tanggal)='$thn_ini'");
         $pem = mysqli_fetch_assoc($pemasukan);
 
         // $total = str_replace(",", "44", number_format($pem['total_pemasukan']));
@@ -152,7 +152,7 @@
     // Mengambil daftar tahun dari kedua tabel menggunakan UNION
     $tahun = mysqli_query($koneksi, "
       SELECT DISTINCT YEAR(tahun) as tahun FROM (
-        SELECT output_tanggal AS tahun FROM out_pertashop 
+        SELECT output_tanggal AS tahun FROM omset_pertashop 
         UNION 
         SELECT opex_tanggal AS tahun FROM opex_pertashop
       ) AS combined_years ORDER BY tahun ASC
@@ -175,7 +175,7 @@
         data: [
           <?php
           foreach ($list_tahun as $thn) {
-            $pemasukan = mysqli_query($koneksi, "SELECT SUM(output_total) AS total_pemasukan FROM out_pertashop WHERE YEAR(output_tanggal) = '$thn'");
+            $pemasukan = mysqli_query($koneksi, "SELECT SUM(output_total) AS total_pemasukan FROM omset_pertashop WHERE YEAR(output_tanggal) = '$thn'");
             $pem = mysqli_fetch_assoc($pemasukan);
             echo ($pem['total_pemasukan'] ?? 0) . ",";
           }

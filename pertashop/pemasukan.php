@@ -67,8 +67,9 @@
                 <thead>
                   <tr>
                     <th width="1%" rowspan="2">NO</th>
+                    <th width="10%" class="text-center" rowspan="2">KODE</th>
                     <th width="10%" class="text-center" rowspan="2">TANGGAL</th>
-                    <th width="20%" class="text-center" colspan="2">ODOMETER</th>
+                    <th width="10%" class="text-center" colspan="2">ODOMETER</th>
                     <th width="30%" class="text-center" colspan="3">SHIFT</th>
                     <th class="text-center" rowspan="2">HARGA</th>
                     <th class="text-center" rowspan="2">TOTAL</th>
@@ -91,6 +92,7 @@
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
+                      <td class="text-center"><?php echo $d['output_kode']; ?></td>
                       <td class="text-center"><?php echo $d['output_tanggal']; ?></td>
                       <td class="text-center"><?php echo $d['odo_masuk']; ?></td>
                       <td class="text-center"><?php echo $d['odo_keluar']; ?></td>
