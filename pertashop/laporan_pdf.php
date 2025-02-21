@@ -86,5 +86,5 @@ $pdf->Cell(41, 7, "Rp. " . number_format($total_pengeluaran) . " ,-", 1, 1, 'R')
 $pdf->Cell(170, 7, 'SALDO', 1, 0, 'R');
 $pdf->Cell(82, 7, "Rp. " . number_format($saldo) . " ,-", 1, 0, 'C');
 
-$pdf->Output();
+$pdf->Output(); 
 ?>
