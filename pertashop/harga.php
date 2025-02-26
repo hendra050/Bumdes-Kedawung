@@ -21,9 +21,6 @@
           <div class="box-header">
             <h3 class="box-title">Harga Penjualan</h3>
             <div class="btn-group pull-right">            
-              <a href="import_transaksi.php"><button type="button" class="btn btn-success btn-sm">
-                <i class="fa fa-file-excel-o"></i> &nbsp Import HPP
-              </button></a>
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> &nbsp Tambah HPP
               </button>

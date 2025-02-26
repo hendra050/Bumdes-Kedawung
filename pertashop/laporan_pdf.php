@@ -50,21 +50,26 @@ $total_pengeluaran = 0;
 $query = "
     SELECT output_tanggal AS tanggal, NULL AS kategori, NULL AS keterangan, output_total AS pemasukan, 0 AS pengeluaran
     FROM omset_pertashop
-    WHERE output_tanggal BETWEEN '$tgl_dari' AND '$tgl_sampai'
+    WHERE DATE(output_tanggal) BETWEEN '$tgl_dari' AND '$tgl_sampai'
+    
     UNION ALL
+    
     SELECT opex_pertashop.opex_tanggal AS tanggal, kategori_pertashop.kategori AS kategori, 
         opex_pertashop.opex_keterangan AS keterangan, 0 AS pemasukan, opex_pertashop.opex_nominal AS pengeluaran
     FROM opex_pertashop
+    
     JOIN kategori_pertashop ON opex_pertashop.opex_kategori = kategori_pertashop.kategori_id
-    WHERE opex_pertashop.opex_tanggal BETWEEN '$tgl_dari' AND '$tgl_sampai'
+    
+    WHERE DATE(opex_pertashop.opex_tanggal) BETWEEN '$tgl_dari' AND '$tgl_sampai'
+    
     ORDER BY tanggal ASC;
 ";
 $result = mysqli_query($koneksi, $query);
 
 while ($row = mysqli_fetch_assoc($result)) {
     $pdf->Cell(10, 7, $no++, 1, 0, 'C');
-    $pdf->Cell(35, 7, date('d-m-Y', strtotime($row['tanggal'])), 1, 0, 'C');
-    $pdf->Cell(45, 7, ($row['kategori'] ?? '-'), 1, 0, 'L');
+    $pdf->Cell(35, 7, date('d-m-Y H:i:s', strtotime($row['tanggal'])), 1, 0, 'C');
+    $pdf->Cell(45, 7, ($row['kategori'] ? $row['kategori'] : "Pemasukan"), 1, 0, 'L');
     $pdf->Cell(80, 7, ($row['keterangan'] ?? '-'), 1, 0, 'L');
 
     $pemasukan = $row['pemasukan'] > 0 ? "Rp. " . number_format($row['pemasukan']) . " ,-" : "-";

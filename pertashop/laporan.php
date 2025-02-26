@@ -84,20 +84,24 @@
               </div>
 
               <a href="laporan_pdf.php?tanggal_dari=<?php echo $tgl_dari ?>&tanggal_sampai=<?php echo $tgl_sampai ?>&kategori=<?php echo $kategori ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file-pdf-o"></i> &nbsp CETAK PDF</a>
-              <a href="laporan_print.php?tanggal_dari=<?php echo $tgl_dari ?>&tanggal_sampai=<?php echo $tgl_sampai ?>&kategori=<?php echo $kategori ?>" target="_blank" class="btn btn-sm btn-primary"><i class="fa fa-print"></i> &nbsp PRINT</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                   <?php
                     $query = "
                     SELECT output_tanggal AS tanggal, NULL AS kategori, NULL AS keterangan, output_total AS pemasukan, 0 AS pengeluaran
                     FROM omset_pertashop
+                    WHERE DATE(output_tanggal) BETWEEN '$tgl_dari' AND '$tgl_sampai'
+                    
                     UNION ALL
+                    
                     SELECT opex_pertashop.opex_tanggal AS tanggal, kategori_pertashop.kategori AS kategori, 
                           opex_pertashop.opex_keterangan AS keterangan, 0 AS pemasukan, opex_pertashop.opex_nominal AS pengeluaran
                     FROM opex_pertashop
                     JOIN kategori_pertashop ON opex_pertashop.opex_kategori = kategori_pertashop.kategori_id
-                    ORDER BY tanggal ASC;
-                    ";
+                    WHERE DATE(opex_pertashop.opex_tanggal) BETWEEN '$tgl_dari' AND '$tgl_sampai'
+                    
+                    ORDER BY tanggal ASC";
+                
                     
                     $result = mysqli_query($koneksi, $query);
 
@@ -108,27 +112,27 @@
                 <thead>
                   <tr> 
                       <th width="1%" rowspan="2">NO</th>
-                      <th width="10%" rowspan="2" class="text-center">TANGGAL</th>
-                      <th rowspan="2" class="text-center">KATEGORI</th>
-                      <th rowspan="2" class="text-center">KETERANGAN</th>
-                      <th colspan="2" class="text-center">JENIS</th>
+                      <th width="20%" rowspan="2" class="text-center">TANGGAL</th>
+                      <th rowspan="2" class="text-center" width="20%">KATEGORI</th>
+                      <th rowspan="2" class="text-center" width="30%">KETERANGAN</th>
+                      <th colspan="2" class="text-center" width="30%">JENIS</th>
                   </tr>
                   <tr>
-                      <th class="text-center">PEMASUKAN</th>
-                      <th class="text-center">PENGELUARAN</th>
+                      <th class="text-center" width="15%">PEMASUKAN</th>
+                      <th class="text-center" width="15%">PENGELUARAN</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
-                      <td class="text-center"><?php echo date('d-m-Y', strtotime($row['tanggal'])); ?></td>
-                      <td><?php echo $row['kategori']; ?></td>
+                      <td class="text-center"><?php echo date('d-m-Y H:i:s', strtotime($row['tanggal'])); ?></td>
+                      <td><?php echo $row['kategori'] ? $row['kategori'] : "Pemasukan"; ?></td>
                       <td><?php echo $row['keterangan']; ?></td>
-                      <td class="text-center text-success">
+                      <td class="text-center text-success" width="15%">
                         <?php echo $row['pemasukan'] ? "Rp. " . number_format($row['pemasukan']) . " ,-": "-"; ?>
                       </td>
-                      <td class="text-center text-danger">
+                      <td class="text-center text-danger" width="15%">
                         <?php echo $row['pengeluaran'] ? "Rp. " . number_format($row['pengeluaran']) . " ,-": "-"; ?>
                       </td>
                     </tr>
@@ -149,7 +153,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th colspan="4" class="text-right">SALDO</th>
+                    <th colspan="4" class="text-right">LABA BERSIH</th>
                     <td colspan="2" class="text-center text-bold text-white bg-primary">
                       <?php echo "Rp. " . number_format($total_pemasukan - $total_pengeluaran) . " ,-"; ?>
                     </td>

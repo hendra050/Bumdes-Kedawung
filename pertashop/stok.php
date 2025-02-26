@@ -69,6 +69,7 @@
                     <th class="text-center" rowspan="2">STOK SISA</th>
                     <th class="text-center" colspan="3">MANUAL</th>
                     <th class="text-center" rowspan="2">PENGUAPAN</th>
+                    <th class="text-center" rowspan="2">OPSI</th>
                   </tr>
                   <tr>
                     <th class="text-center">AWAL</th>
@@ -94,6 +95,34 @@
                       <td class="text-center"><?php echo $d['manual_akhir'];?> </td>
                       <td class="text-center"><?php echo $d['manual_selisih'];?> </td>
                       <td class="text-center"><?php echo $d['penguapan'];?> </td>
+                      <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_output_<?php echo $d['stok_id'] ?>">
+                          <i class="fa fa-trash"></i>
+                        </button>
+                        
+                        <!-- modal hapus -->
+                        <div class="modal fade" id="hapus_output_<?php echo $d['stok_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">Peringatan!</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+
+                                <p>Yakin ingin menghapus data ini ?</p>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <a href="stok_hapus.php?id=<?php echo $d['stok_id'] ?>" class="btn btn-primary">Hapus</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                     <?php 
                   }

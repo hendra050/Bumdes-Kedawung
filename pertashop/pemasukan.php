@@ -21,13 +21,36 @@
           <div class="box-header">
             <h3 class="box-title">Omset</h3>
             <div class="btn-group pull-right">            
-              <a href="import_transaksi.php"><button type="button" class="btn btn-success btn-sm">
-                <i class="fa fa-file-excel-o"></i> &nbsp Import Pemasukan
-              </button></a>
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> &nbsp Tambah Pemaasukan
               </button>
-            </div>
+            </div><br>
+            <form method="GET" action="">
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="tanggal">Cari berdasarkan Tanggal:</label>
+                  <input type="date" name="tanggal" class="form-control" value="<?php echo isset($_GET['tanggal']) ? $_GET['tanggal'] : ''; ?>">
+                </div>
+
+                <div class="col-md-3">
+                  <label for="filter">Filter berdasarkan Waktu:</label>
+                  <select name="filter" class="form-control">
+                    <option value="">-- Pilih Filter --</option>
+                    <option value="minggu">Minggu Ini</option>
+                    <option value="bulan">Bulan Ini</option>
+                    <option value="semester">Semester Ini</option>
+                    <option value="tahun">Tahun Ini</option>
+                  </select>
+                </div>
+                
+                <div class="col-md-2">
+                  <br>
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Cari</button>
+                  <a href="pemasukan.php" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</a>
+                </div>
+              </div>
+            </form>
+            <br>
           </div>
           <div class="box-body">
 
@@ -86,8 +109,30 @@
                 <tbody>
                   <?php   
                   include '../koneksi.php';
-                  $no=1;
-                  $data = mysqli_query($koneksi, "SELECT * FROM omset_pertashop order by output_tanggal desc");
+                  $no = 1;
+                  $where = "";
+                  $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+                  
+                  if (!empty($filter)) {
+                      $current_date = date("Y-m-d");
+                      if ($filter == "minggu") {
+                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 WEEK)";
+                      } elseif ($filter == "bulan") {
+                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 MONTH)";
+                      } elseif ($filter == "semester") {
+                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 6 MONTH)";
+                      } elseif ($filter == "tahun") {
+                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 YEAR)";
+                      }
+                  }
+
+                  if (isset($_GET['tanggal']) && !empty($_GET['tanggal'])) {
+                      $tanggal = $_GET['tanggal'];
+                      $where = "WHERE DATE(output_tanggal) = '$tanggal'";
+                  }
+                  
+                  $data = mysqli_query($koneksi, "SELECT * FROM omset_pertashop $where ORDER BY output_tanggal DESC");
+                  
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
@@ -123,18 +168,17 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                  <input type="hidden" name="output_kode" value="<?php echo $d['output_kode']; ?>">
 
-                                  <div class="form-group" style="width:100%;margin-bottom:20px">
-                                    <label>Tanggal</label>
-                                    <input type="hidden" name="id" value="<?php echo $d['output_id'] ?>">
-                                    <input type="text" style="width:100%" name="tanggal" required="required" class="form-control datepicker2" value="<?php echo $d['output_tanggal'] ?>">
+                                  <div class="form-group">
+                                    <label>Odo masuk</label>
+                                    <input type="number" name="odomasuk" required class="form-control" value="<?php echo $d['odo_masuk']; ?>">
                                   </div>
 
-                                  <div class="form-group" style="width:100%;margin-bottom:20px">
-                                    <label>Penjualan </label>
-                                    <input type="number" style="width:100%" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan hari ini .." value="<?php echo $d['output_jual']; ?>" step="0.01" min="0">
-                                    </div>
-
+                                  <div class="form-group">
+                                    <label>Odo Keluar</label>
+                                    <input type="number" name="odokeluar" required class="form-control" value="<?php echo $d['odo_keluar']; ?>" step="0.01" min="0">
+                                  </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -144,6 +188,7 @@
                             </div>
                           </div>
                         </form>
+
 
                         <!-- modal hapus -->
                         <div class="modal fade" id="hapus_output_<?php echo $d['output_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

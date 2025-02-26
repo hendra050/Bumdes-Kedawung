@@ -37,7 +37,7 @@ if (mysqli_num_rows($result) > 0) {
     $selisih_jam = ($time_input - $time_login) / 3600; // Konversi ke jam
 
     // **PERBAIKAN LOGIKA SHIFT**
-    if ($selisih_jam >= 68) {
+    if ($selisih_jam >= 8) {
         $shift = "fullday"; 
     } else {
         $jam_login = (int) date('H', $time_login);
@@ -60,8 +60,8 @@ if (mysqli_num_rows($result) > 0) {
         }
     }
 
-    // Generate kode otomatis (401 + 8 angka random)
-    $kode = "MSK-" . str_pad(mt_rand(0, 99999999), 8, '0', STR_PAD_LEFT);
+    // Generate kode otomatis (401 + 7 angka random)
+    $kode = "401-" . str_pad(mt_rand(0, 9999999), 7, '0', STR_PAD_LEFT);
 
     // Insert data ke database
     $insert_query = "INSERT INTO omset_pertashop (output_kode, output_tanggal, odo_masuk, odo_keluar, output_jual, harga, output_total, shift)

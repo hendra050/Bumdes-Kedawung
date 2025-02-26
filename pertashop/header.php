@@ -122,6 +122,7 @@
               <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
             </a>
           </li>
+
           <li class="treeview">
             <a href="#">
               <i class="fa fa-th-list"></i>
@@ -155,6 +156,7 @@
               <i class="fa fa-circle-o"> </i> <span>Kategori Pengeluaran</span>
             </a>
           </li>
+
           <li>
             <a href="asset.php">
               <i class="fa fa-circle-o"> </i> <span>Asset Perta</span>
@@ -164,21 +166,6 @@
           <li>
             <a href="laporan.php">
               <i class="fa fa-file-o"></i> Laporan Laba/Rugi</a>
-          </li>
-
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-file"></i>
-              <span>Laporan Keuangan</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Arus Kas</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Neraca</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Perubahan Modal</a></li>
-            </ul>
           </li>
 
           <li>

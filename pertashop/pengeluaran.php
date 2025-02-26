@@ -20,14 +20,37 @@
 
           <div class="box-header">
             <h3 class="box-title">Pengeluaran</h3>
-            <div class="btn-group pull-right">            
-              <a href="import_transaksi.php"><button type="button" class="btn btn-success btn-sm">
-                <i class="fa fa-file-excel-o"></i> &nbsp Import Pengeluaran
-              </button></a>
+            <div class="btn-group pull-right">
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> &nbsp Tambah Pengeluaran
               </button>
             </div>
+
+            <form method="GET" action="">
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="tanggal">Cari berdasarkan Tanggal:</label>
+                  <input type="date" name="tanggal" class="form-control" value="<?php echo isset($_GET['tanggal']) ? $_GET['tanggal'] : ''; ?>">
+                </div>
+
+                <div class="col-md-3">
+                  <label for="filter">Filter berdasarkan Waktu:</label>
+                  <select name="filter" class="form-control">
+                    <option value="">-- Pilih Filter --</option>
+                    <option value="minggu">Minggu Ini</option>
+                    <option value="bulan">Bulan Ini</option>
+                    <option value="semester">Semester Ini</option>
+                    <option value="tahun">Tahun Ini</option>
+                  </select>
+                </div>
+                
+                <div class="col-md-2">
+                  <br>
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Cari</button>
+                  <a href="pengeluaran.php" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</a>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="box-body">
 
@@ -95,8 +118,36 @@
                   <?php 
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi,"SELECT * FROM opex_pertashop,kategori_pertashop where kategori_id=opex_kategori order by opex_tanggal desc");
-                  while($d = mysqli_fetch_array($data)){
+                  $where = "";
+                  $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+                
+                  if (!empty($filter)) {
+                      $current_date = date("Y-m-d");
+                      if ($filter == "minggu") {
+                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 WEEK)";
+                      } elseif ($filter == "bulan") {
+                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 MONTH)";
+                      } elseif ($filter == "semester") {
+                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 6 MONTH)";
+                      } elseif ($filter == "tahun") {
+                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 YEAR)";
+                      }
+                  }
+                  
+                  if (isset($_GET['tanggal']) && !empty($_GET['tanggal'])) {
+                      $tanggal = $_GET['tanggal'];
+                      if (!empty($where)) {
+                          $where .= " AND ";
+                      }
+                      $where .= "DATE(opex_tanggal) = '$tanggal'";
+                  }
+                  
+                  if (!empty($where)) {
+                      $where = "WHERE " . $where;
+                  }
+                  
+                  $data = mysqli_query($koneksi, "SELECT * FROM opex_pertashop, kategori_pertashop WHERE kategori_id = opex_kategori $where ORDER BY opex_tanggal DESC");
+                                    while($d = mysqli_fetch_array($data)) {
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
