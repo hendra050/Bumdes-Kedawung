@@ -111,16 +111,25 @@
             </a>
           </li>
 
-          <li>
-            <a href="kategori.php">
-              <i class="fa fa-folder"></i> <span>DATA KATEGORI</span>
-            </a>
-          </li>
-
+          
           <li>
             <a href="transaksi.php">
               <i class="fa fa-folder"></i> <span>DATA TRANSAKSI</span>
             </a>
+          </li>
+          
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-hand-paper-o"></i>
+              <span>Kategori Transaksi</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+              <li><a href="kategori.php"><i class="fa fa-circle-o"></i> Tambah Kategori Pertashop</a></li>
+              <li><a href="kategori.php"><i class="fa fa-circle-o"></i> Tambah Kategori Peternakan</a></li>
+            </ul>
           </li>
 
           <li class="treeview">
@@ -168,13 +177,6 @@
               <i class="fa fa-lock"></i> <span>GANTI PASSWORD</span>
             </a>
           </li>
-
-          <li>
-            <a href="logout.php" onclick="return confirm('Apakah Anda yakin untuk logout?')">
-              <i class="fa fa-sign-out"></i> <span>LOGOUT</span>
-            </a>
-          </li>
-
 
         </ul>
       </section>

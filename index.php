@@ -106,7 +106,7 @@
             ></div>
             <div
                 class="box box-4"
-                style="--img: url(https://th.bing.com/th/id/OIP.bZJFbHgchvVRWlv14R5XAgHaEK?rs=1&pid=ImgDetMain)"
+                style="--img: url(https://www.pertanianku.com/wp-content/uploads/2016/08/Mengenal-Macam-macam-Jenis-Kambing-Gibas.jpg)"
                 data-text="Peternakan"
                 onclick="window.location.href='peternakan.php'"
             ></div>
