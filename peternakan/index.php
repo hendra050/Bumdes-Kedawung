@@ -21,7 +21,7 @@
         <div class="small-box bg-green">
           <div class="inner">
             <?php 
-            $penjualan_minggu_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM out_pertashop WHERE YEARWEEK(output_tanggal, 1) = YEARWEEK(CURDATE(), 1)");
+            $penjualan_minggu_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM omset_peternakan WHERE YEARWEEK(output_tanggal, 1) = YEARWEEK(CURDATE(), 1)");
             $m = mysqli_fetch_assoc($penjualan_minggu_ini);
             ?>
             <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($m['total_penjualan'] ?? 0) . " ,-" ?></h4>
@@ -38,7 +38,7 @@
         <div class="small-box bg-blue">
           <div class="inner">
             <?php 
-            $penjualan_bulan_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM out_pertashop WHERE YEAR(output_tanggal) = YEAR(CURDATE()) AND MONTH(output_tanggal) = MONTH(CURDATE())");
+            $penjualan_bulan_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM omset_peternakan WHERE YEAR(output_tanggal) = YEAR(CURDATE()) AND MONTH(output_tanggal) = MONTH(CURDATE())");
             $b = mysqli_fetch_assoc($penjualan_bulan_ini);
             ?>
             <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($b['total_penjualan'] ?? 0) . " ,-" ?></h4>
@@ -55,7 +55,7 @@
         <div class="small-box bg-red">
           <div class="inner">
             <?php 
-            $penjualan_semester_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM out_pertashop WHERE YEAR(output_tanggal) = YEAR(CURDATE()) AND 
+            $penjualan_semester_ini = mysqli_query($koneksi, "SELECT SUM(output_total) as total_penjualan FROM omset_peternakan WHERE YEAR(output_tanggal) = YEAR(CURDATE()) AND 
             ((MONTH(output_tanggal) BETWEEN 1 AND 6 AND MONTH(CURDATE()) BETWEEN 1 AND 6) 
             OR (MONTH(output_tanggal) BETWEEN 7 AND 12 AND MONTH(CURDATE()) BETWEEN 7 AND 12))");
             $s = mysqli_fetch_assoc($penjualan_semester_ini);
@@ -74,7 +74,7 @@
         <div class="small-box bg-black">
             <div class="inner">
                 <?php 
-                $penjualan_tahun_ini = mysqli_query($koneksi, "SELECT sum(output_total) as total_penjualan FROM out_pertashop WHERE YEAR(output_tanggal) = YEAR(CURDATE())");
+                $penjualan_tahun_ini = mysqli_query($koneksi, "SELECT sum(output_total) as total_penjualan FROM omset_peternakan WHERE YEAR(output_tanggal) = YEAR(CURDATE())");
                 $p = mysqli_fetch_assoc($penjualan_tahun_ini);
                 ?>
                 <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($p['total_penjualan'] ?? 0) . " ,-" ?></h4>
@@ -95,7 +95,7 @@
         <div class="small-box bg-green">
           <div class="inner">
             <?php 
-            $pengeluaran_minggu_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEARWEEK(opex_tanggal, 1) = YEARWEEK(CURDATE(), 1)");
+            $pengeluaran_minggu_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_peternakan WHERE YEARWEEK(opex_tanggal, 1) = YEARWEEK(CURDATE(), 1)");
             $m = mysqli_fetch_assoc($pengeluaran_minggu_ini);
             ?>
             <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($m['total_pengeluaran'] ?? 0) . " ,-" ?></h4>
@@ -112,7 +112,7 @@
         <div class="small-box bg-blue">
           <div class="inner">
             <?php 
-            $pengeluaran_bulan_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEAR(opex_tanggal) = YEAR(CURDATE()) AND MONTH(opex_tanggal) = MONTH(CURDATE())");
+            $pengeluaran_bulan_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_peternakan WHERE YEAR(opex_tanggal) = YEAR(CURDATE()) AND MONTH(opex_tanggal) = MONTH(CURDATE())");
             $b = mysqli_fetch_assoc($pengeluaran_bulan_ini);
             ?>
             <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($b['total_pengeluaran'] ?? 0) . " ,-" ?></h4>
@@ -129,7 +129,7 @@
         <div class="small-box bg-red">
           <div class="inner">
           <?php 
-            $pengeluaran_semester_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEAR(opex_tanggal) = YEAR(CURDATE()) AND 
+            $pengeluaran_semester_ini = mysqli_query($koneksi, "SELECT SUM(opex_nominal) as total_pengeluaran FROM opex_peternakan WHERE YEAR(opex_tanggal) = YEAR(CURDATE()) AND 
             ((MONTH(opex_tanggal) BETWEEN 1 AND 6 AND MONTH(CURDATE()) BETWEEN 1 AND 6) 
             OR (MONTH(opex_tanggal) BETWEEN 7 AND 12 AND MONTH(CURDATE()) BETWEEN 7 AND 12))");
             $s = mysqli_fetch_assoc($pengeluaran_semester_ini);
@@ -148,7 +148,7 @@
         <div class="small-box bg-black">
           <div class="inner">
             <?php 
-            $pengeluaran_tahun_ini = mysqli_query($koneksi, "SELECT sum(opex_nominal) as total_pengeluaran FROM opex_pertashop WHERE YEAR(opex_tanggal) = YEAR(CURDATE())");
+            $pengeluaran_tahun_ini = mysqli_query($koneksi, "SELECT sum(opex_nominal) as total_pengeluaran FROM opex_peternakan WHERE YEAR(opex_tanggal) = YEAR(CURDATE())");
             $p = mysqli_fetch_assoc($pengeluaran_tahun_ini);
             ?>
             <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($p['total_pengeluaran'] ?? 0) . " ,-" ?></h4>

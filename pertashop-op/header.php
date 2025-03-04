@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Pertashop - Sistem Informasi Manajemen Keuangan</title>
-  <link rel="shortcut icon" href="/simk/gambar/sistem/logo-bumdes.png" />
+  <link rel="shortcut icon" href="/BUMDES-KEDAWUNG/gambar/sistem/logo-bumdes.png" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/bower_components/font-awesome/css/font-awesome.min.css">
@@ -25,7 +25,7 @@
   <?php
   include '../koneksi.php';
   session_start();
-  if ($_SESSION['status'] != "peternakan_logedin") {
+  if ($_SESSION['status'] != "pertashop-op_logedin") {
     header("location:../index.php?alert=belum_login");
   }
   ?>
@@ -44,11 +44,11 @@
     }
 
     .skin-blue .main-header .navbar {
-      background-color:#5cb85c;
+      background-color: #fe0000;
     }
 
     .skin-blue .main-header .logo {
-      background-color:#4cae4c;
+      background-color: #b20000;
       color: #fff;
       border-bottom: 0 solid transparent;
     }
@@ -58,7 +58,7 @@
     <header class="main-header">
       <a href="index.php" class="logo">
         <span class="logo-mini"><b><i class="fa fa-money"></i></b> </span>
-        <span class="logo-lg"><b>SIMK Peternakan</b></span>
+        <span class="logo-lg"><b>SIMK Pertashop</b></span>
       </a>
       <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -113,30 +113,17 @@
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
-
+        
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">MAIN NAVIGATION</li>
+          
           <li>
             <a href="index.php">
               <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
             </a>
           </li>
-          
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-th-list"></i>
-              <span>Status Stok</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="tambah.php"><i class="fa fa-plus"></i> <span>Penambahan Stok</span></a></li>
-              <li><a href="stok.php"><i class="fa fa-database"></i> <span>Sisa Stok</span></a></li>
-              <li><a href="harga.php"><i class="fa fa-usd"></i> <span>Update Harga</span></a></li>
-            </ul>
-          </li>
-          
+
+
           <li>
             <a href="pemasukan.php">
               <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>
@@ -148,22 +135,7 @@
               <i class="fa fa-circle-o"> </i> <span>Pengeluaran</span>
             </a>
           </li>
-          
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-file"></i>
-              <span>Laporan Keuangan</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Laba/Rugi</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Arus Kas</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Neraca</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Perubahan Modal</a></li>
-            </ul>
-          </li>
+
 
           <li>
             <a href="gantipassword.php">

@@ -40,10 +40,12 @@
                 <label>Level</label>
                 <select class="form-control" name="level" required="required">
                   <option value=""> - Pilih Level - </option>
-                  <option value="administrator"> Administrator </option>
-                  <option value="manajemen"> Manajemen </option>
+                  <option value="administrator"> Direktur </option>
+                  <option value="manajemen"> Manajemen BUMDEs</option>
                   <option value="pertashop"> Pertashop </option>
+                  <option value="pertashop-op"> Pertashop Operator</option>
                   <option value="peternakan"> Peternakan </option>
+                  <option value="peternakan-op"> Peternakan Operator</option>
                 </select>
               </div>
               <div class="form-group">

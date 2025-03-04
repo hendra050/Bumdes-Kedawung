@@ -48,7 +48,7 @@
                         <select name="kategori" class="form-control" required="required">
                           <option value="">- Pilih -</option>
                           <?php 
-                          $kategori = mysqli_query($koneksi,"SELECT * FROM kategori_pertashop ORDER BY kategori ASC");
+                          $kategori = mysqli_query($koneksi,"SELECT * FROM kategori_peternakan ORDER BY kategori ASC");
                           while($k = mysqli_fetch_array($kategori)){
                             ?>
                             <option value="<?php echo $k['kategori_id']; ?>"><?php echo $k['kategori']; ?></option>
@@ -95,7 +95,7 @@
                   <?php 
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi,"SELECT * FROM opex_pertashop,kategori_pertashop where kategori_id=opex_kategori order by opex_tanggal desc");
+                  $data = mysqli_query($koneksi,"SELECT * FROM opex_peternakan,kategori_peternakan where kategori_id=opex_kategori order by opex_tanggal desc");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
@@ -137,7 +137,7 @@
                                     <select name="kategori" style="width:100%" class="form-control" required="required">
                                       <option value="">- Pilih -</option>
                                       <?php 
-                                      $kategori = mysqli_query($koneksi,"SELECT * FROM kategori_pertashop ORDER BY kategori ASC");
+                                      $kategori = mysqli_query($koneksi,"SELECT * FROM kategori_peternakan ORDER BY kategori ASC");
                                       while($k = mysqli_fetch_array($kategori)){
                                         ?>
                                         <option <?php if($d['opex_kategori'] == $k['kategori_id']){echo "selected='selected'";} ?> value="<?php echo $k['kategori_id']; ?>"><?php echo $k['kategori']; ?></option>

@@ -102,7 +102,7 @@
       <?php
       for($bulan=1;$bulan<=12;$bulan++){
         $thn_ini = date('Y');
-        $pemasukan = mysqli_query($koneksi,"select sum(output_total) as total_pemasukan from out_pertashop where month(output_tanggal)='$bulan' and year(output_tanggal)='$thn_ini'");
+        $pemasukan = mysqli_query($koneksi,"SELECT SUM(output_total) as total_pemasukan from omset_peternakan where month(output_tanggal)='$bulan' and year(output_tanggal)='$thn_ini'");
         $pem = mysqli_fetch_assoc($pemasukan);
 
         // $total = str_replace(",", "44", number_format($pem['total_pemasukan']));
@@ -127,7 +127,7 @@
       <?php
       for($bulan=1;$bulan<=12;$bulan++){
         $thn_ini = date('Y');
-        $pengeluaran = mysqli_query($koneksi,"select sum(opex_nominal) as total_pengeluaran from opex_pertashop where month(opex_tanggal)='$bulan' and year(opex_tanggal)='$thn_ini'");
+        $pengeluaran = mysqli_query($koneksi,"select sum(opex_nominal) as total_pengeluaran from opex_peternakan where month(opex_tanggal)='$bulan' and year(opex_tanggal)='$thn_ini'");
         $peng = mysqli_fetch_assoc($pengeluaran);
 
         // $total = str_replace(",", "44", number_format($peng['total_pengeluaran']));
@@ -152,9 +152,9 @@
     // Mengambil daftar tahun dari kedua tabel menggunakan UNION
     $tahun = mysqli_query($koneksi, "
       SELECT DISTINCT YEAR(tahun) as tahun FROM (
-        SELECT output_tanggal AS tahun FROM out_pertashop 
+        SELECT output_tanggal AS tahun FROM omset_peternakan 
         UNION 
-        SELECT opex_tanggal AS tahun FROM opex_pertashop
+        SELECT opex_tanggal AS tahun FROM opex_peternakan
       ) AS combined_years ORDER BY tahun ASC
     ");
 
@@ -175,7 +175,7 @@
         data: [
           <?php
           foreach ($list_tahun as $thn) {
-            $pemasukan = mysqli_query($koneksi, "SELECT SUM(output_total) AS total_pemasukan FROM out_pertashop WHERE YEAR(output_tanggal) = '$thn'");
+            $pemasukan = mysqli_query($koneksi, "SELECT SUM(output_total) AS total_pemasukan FROM omset_peternakan WHERE YEAR(output_tanggal) = '$thn'");
             $pem = mysqli_fetch_assoc($pemasukan);
             echo ($pem['total_pemasukan'] ?? 0) . ",";
           }
@@ -191,7 +191,7 @@
         data: [
           <?php
           foreach ($list_tahun as $thn) {
-            $pengeluaran = mysqli_query($koneksi, "SELECT SUM(opex_nominal) AS total_pengeluaran FROM opex_pertashop WHERE YEAR(opex_tanggal) = '$thn'");
+            $pengeluaran = mysqli_query($koneksi, "SELECT SUM(opex_nominal) AS total_pengeluaran FROM opex_peternakan WHERE YEAR(opex_tanggal) = '$thn'");
             $peng = mysqli_fetch_assoc($pengeluaran);
             echo ($peng['total_pengeluaran'] ?? 0) . ",";
           }

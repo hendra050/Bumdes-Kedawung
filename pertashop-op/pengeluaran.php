@@ -117,37 +117,31 @@
                 <tbody>
                   <?php 
                   include '../koneksi.php';
-                  $no=1;
-                  $where = "";
+                  $no = 1;
+                  $src = "";
                   $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
                 
                   if (!empty($filter)) {
                       $current_date = date("Y-m-d");
                       if ($filter == "minggu") {
-                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 WEEK)";
+                          $src = "AND opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 WEEK)";
                       } elseif ($filter == "bulan") {
-                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 MONTH)";
+                          $src = "AND opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 MONTH)";
                       } elseif ($filter == "semester") {
-                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 6 MONTH)";
+                          $src = "AND opex_tanggal >= DATE_SUB('$current_date', INTERVAL 6 MONTH)";
                       } elseif ($filter == "tahun") {
-                          $where .= "opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 YEAR)";
+                          $src = "AND opex_tanggal >= DATE_SUB('$current_date', INTERVAL 1 YEAR)";
                       }
                   }
                   
                   if (isset($_GET['tanggal']) && !empty($_GET['tanggal'])) {
                       $tanggal = $_GET['tanggal'];
-                      if (!empty($where)) {
-                          $where .= " AND ";
-                      }
-                      $where .= "DATE(opex_tanggal) = '$tanggal'";
+                      $src = "AND DATE(opex_tanggal) = '$tanggal'";
                   }
                   
-                  if (!empty($where)) {
-                      $where = "WHERE " . $where;
-                  }
+                  $data = mysqli_query($koneksi, "SELECT * FROM opex_pertashop, kategori_pertashop WHERE kategori_id = opex_kategori $src ORDER BY opex_tanggal DESC");
                   
-                  $data = mysqli_query($koneksi, "SELECT * FROM opex_pertashop, kategori_pertashop WHERE kategori_id = opex_kategori $where ORDER BY opex_tanggal DESC");
-                                    while($d = mysqli_fetch_array($data)) {
+                  while($d = mysqli_fetch_array($data)) {
                     ?>
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>

@@ -23,6 +23,9 @@ if ($cek > 0) {
     if ($data['user_level'] == "pertashop") {
         $_SESSION['status'] = "pertashop_logedin";
         header("location:pertashop/");
+    }else if ($data['user_level'] == "pertashop-op") {
+        $_SESSION['status'] = "pertashop-op_logedin";
+        header("location:pertashop-op/");
     } else {
         header("location:pertashop.php?alert=gagal");
     }

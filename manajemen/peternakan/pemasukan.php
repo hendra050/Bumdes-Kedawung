@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/../header.php'; ?>
 
 <div class="content-wrapper">
 
@@ -62,7 +62,7 @@
                                   <select name="kategori" class="form-control" required>
                                       <option value="">-- Pilih Kategori --</option>
                                       <?php
-                                      include '../koneksi.php';
+                                      include '../../koneksi.php';
                                       $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori_omset_peternakan ORDER BY kategori asc");
                                       while ($row = mysqli_fetch_assoc($kategori_query)) {
                                           echo "<option value='".$row['kategori_id']."'>".$row['kategori']."</option>";
@@ -99,7 +99,7 @@
                 </thead>
                 <tbody>
                   <?php   
-                  include '../koneksi.php';
+                  include '../../koneksi.php';
                   $no=1;
                   $data = mysqli_query($koneksi, "SELECT * FROM omset_peternakan, kategori_omset_peternakan WHERE kategori_id= omset_kategori order by output_tanggal desc");
                   while($d = mysqli_fetch_array($data)){
@@ -197,4 +197,4 @@
   </section>
 
 </div>
-<?php include 'footer.php'; ?>
+<?php include __DIR__ . '/../footer.php'; ?>

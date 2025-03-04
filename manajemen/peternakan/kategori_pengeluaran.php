@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/../header.php'; ?>
 
 <div class="content-wrapper">
 
@@ -30,7 +30,7 @@
           <div class="box-body">
 
             <!-- Modal -->
-            <form action="kategori_act.php" method="post">
+            <form action="kategori_act_pengeluaran.php" method="post">
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -69,9 +69,9 @@
                 </thead>
                 <tbody>
                   <?php 
-                  include '../koneksi.php';
+                  include __DIR__ . '/../../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi,"SELECT * FROM kategori_pertashop ORDER BY kategori ASC");
+                  $data = mysqli_query($koneksi,"SELECT * FROM kategori_peternakan ORDER BY kategori ASC");
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
@@ -92,7 +92,7 @@
                         }
                         ?>
 
-                        <form action="kategori_update.php" method="post">
+                        <form action="kategori_update_pengeluaran.php" method="post">
                           <div class="modal fade" id="edit_kategori_<?php echo $d['kategori_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
@@ -137,7 +137,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <a href="kategori_hapus.php?id=<?php echo $d['kategori_id'] ?>" class="btn btn-primary">Hapus</a>
+                                <a href="kategori_hapus_pengeluaran.php?id=<?php echo $d['kategori_id'] ?>" class="btn btn-primary">Hapus</a>
                               </div>
                             </div>
                           </div>
@@ -159,4 +159,4 @@
   </section>
 
 </div>
-<?php include 'footer.php'; ?>
+<?php include __DIR__ . '/../footer.php'; ?>

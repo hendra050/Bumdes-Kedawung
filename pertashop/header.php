@@ -139,27 +139,8 @@
           </li>
 
           <li>
-            <a href="pemasukan.php">
-              <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="pengeluaran.php">
-              <i class="fa fa-circle-o"> </i> <span>Pengeluaran</span>
-            </a>
-          </li>
-          
-          
-          <li>
-            <a href="kategori.php">
-              <i class="fa fa-circle-o"> </i> <span>Kategori Pengeluaran</span>
-            </a>
-          </li>
-
-          <li>
             <a href="asset.php">
-              <i class="fa fa-circle-o"> </i> <span>Asset Perta</span>
+              <i class="fa fa-circle-o"> </i> <span>Asset Pertashop</span>
             </a>
           </li>
           
@@ -169,16 +150,15 @@
           </li>
 
           <li>
+            <a href="laporan_stok.php">
+              <i class="fa fa-file-o"></i> Laporan Stok</a>
+          </li>
+
+          <li>
             <a href="gantipassword.php">
               <i class="fa fa-lock"></i> <span>Ganti Password</span>
             </a>
           </li>
-
-          <!-- <li>
-            <a href="logout.php" onclick="return confirm('Apakah Anda yakin untuk logout?')">
-              <i class="fa fa-sign-out"></i> <span>LOGOUT</span>
-            </a>
-          </li> -->
 
         </ul>
       </section>

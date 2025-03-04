@@ -123,12 +123,6 @@
                                 <div class="modal-body">
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
-                                    <label>Tanggal</label>
-                                    <input type="hidden" name="id" value="<?php echo $d['input_id'] ?>">
-                                    <input type="text" style="width:100%" name="tanggal" required="required" class="form-control datepicker2" value="<?php echo $d['input_tanggal'] ?>">
-                                  </div>
-
-                                  <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Jumlah</label>
                                     <input type="number" style="width:100%" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah .." value="<?php echo $d['input_jumlah'] ?>" step="0.01" min="0">
                                   </div>

@@ -110,28 +110,28 @@
                   <?php   
                   include '../koneksi.php';
                   $no = 1;
-                  $where = "";
+                  $src = "";
                   $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
                   
                   if (!empty($filter)) {
                       $current_date = date("Y-m-d");
                       if ($filter == "minggu") {
-                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 WEEK)";
+                          $src = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 WEEK)";
                       } elseif ($filter == "bulan") {
-                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 MONTH)";
+                          $src = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 MONTH)";
                       } elseif ($filter == "semester") {
-                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 6 MONTH)";
+                          $src = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 6 MONTH)";
                       } elseif ($filter == "tahun") {
-                          $where = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 YEAR)";
+                          $src = "WHERE output_tanggal >= DATE_SUB('$current_date', INTERVAL 1 YEAR)";
                       }
                   }
 
                   if (isset($_GET['tanggal']) && !empty($_GET['tanggal'])) {
                       $tanggal = $_GET['tanggal'];
-                      $where = "WHERE DATE(output_tanggal) = '$tanggal'";
+                      $src = "WHERE DATE(output_tanggal) = '$tanggal'";
                   }
                   
-                  $data = mysqli_query($koneksi, "SELECT * FROM omset_pertashop $where ORDER BY output_tanggal DESC");
+                  $data = mysqli_query($koneksi, "SELECT * FROM omset_pertashop $src ORDER BY output_tanggal DESC");
                   
                   while($d = mysqli_fetch_array($data)){
                     ?>

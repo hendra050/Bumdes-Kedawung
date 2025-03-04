@@ -17,7 +17,7 @@
   <style>
     .bg-danger{ 
       background-size: 100% 100%;
-      background-image: linear-gradient(rgba(255, 250, 250, 0.85),rgba(0, 0, 0, 0.5)), url(https://th.bing.com/th/id/OIP.bZJFbHgchvVRWlv14R5XAgHaEK?rs=1&pid=ImgDetMain);
+      background-image: linear-gradient(rgba(255, 250, 250, 0.85),rgba(0, 0, 0, 0.5)), url(https://www.pertanianku.com/wp-content/uploads/2016/08/Mengenal-Macam-macam-Jenis-Kambing-Gibas.jpg);
       background-position-x: center;
       background-position-y: center;
     }
