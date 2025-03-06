@@ -22,7 +22,7 @@
             <h3 class="box-title">Omset</h3>
             <div class="btn-group pull-right">            
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa fa-plus"></i> &nbsp Tambah Pemaasukan
+                <i class="fa fa-plus"></i> &nbsp Tambah Pemasukan
               </button>
             </div><br>
             <form method="GET" action="">

@@ -75,7 +75,7 @@
               </a>
             </li>
             <li>
-              <a href="logout.php" onclick="return confirm('Apakah Anda yakin untuk logout?')"><i class="fa fa-sign-out"></i> LOGOUT</a>
+              <a href="<?php echo MANAJEMEN_URL; ?>logout.php" onclick="return confirm('Apakah Anda yakin untuk logout?')"><i class="fa fa-sign-out"></i> LOGOUT</a>
             </li>
           </ul>
         </div>
@@ -108,7 +108,7 @@
 
           <li>
             <a href="<?php echo MANAJEMEN_URL; ?>index.php">
-              <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
+              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
           
@@ -136,27 +136,27 @@
               </span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="<?php echo MANAJEMEN_URL; ?>pertashop/kategori.php"><i class="fa fa-circle-o"></i> <span>+ Kategori Pertashop</span></a></li>
-              <li><a href="<?php echo MANAJEMEN_URL; ?>peternakan/kategori_penjualan_peternakan.php"><i class="fa fa-circle-o"></i> + Kategori Kambing</a></li>
-              <li><a href="<?php echo MANAJEMEN_URL; ?>peternakan/kategori_pengeluaran.php"><i class="fa fa-circle-o"></i> + Kategori Pengeluaran</a></li>
+              <li><a href="<?php echo MANAJEMEN_URL; ?>pertashop/kategori.php"><i class="fa fa-circle-o"></i> <span>+ Pengeluaran Pertashop</span></a></li>
+              <li><a href="<?php echo MANAJEMEN_URL; ?>peternakan/kategori_penjualan_peternakan.php"><i class="fa fa-circle-o"></i> + Jenis Penjualan</a></li>
+              <li><a href="<?php echo MANAJEMEN_URL; ?>peternakan/kategori_pengeluaran.php"><i class="fa fa-circle-o"></i> + Pengeluaran Peternakan</a></li>
             </ul>
           </li>
 
           <li>
             <a href="<?php echo MANAJEMEN_URL; ?>gaji.php">
-              <i class="fa fa-money"></i> <span>GAJI KARYAWAN</span>
+              <i class="fa fa-money"></i> <span>Gaji Karyawan</span>
             </a>
           </li>
 
           <li>
             <a href="<?php echo MANAJEMEN_URL; ?>laporan.php">
-              <i class="fa fa-file"></i> <span>LAPORAN</span>
+              <i class="fa fa-file"></i> <span>Laporan</span>
             </a>
           </li>
 
           <li>
             <a href="<?php echo MANAJEMEN_URL; ?>gantipassword.php">
-              <i class="fa fa-lock"></i> <span>GANTI PASSWORD</span>
+              <i class="fa fa-lock"></i> <span>Ganti Password</span>
             </a>
           </li>
 

@@ -28,8 +28,36 @@
                 <i class="fa fa-plus"></i> &nbsp Tambah Pengeluaran
               </button>
             </div>
+            <br><br>
+            <form method="GET" action="">
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="tanggal">Cari berdasarkan Tanggal:</label>
+                  <input type="date" name="tanggal" class="form-control" value="<?php echo isset($_GET['tanggal']) ? $_GET['tanggal'] : ''; ?>">
+                </div>
+
+                <div class="col-md-3">
+                  <label for="filter">Filter berdasarkan Waktu:</label>
+                  <select name="filter" class="form-control">
+                    <option value="">-- Pilih Filter --</option>
+                    <option value="minggu">Minggu Ini</option>
+                    <option value="bulan">Bulan Ini</option>
+                    <option value="semester">Semester Ini</option>
+                    <option value="tahun">Tahun Ini</option>
+                  </select>
+                </div>
+                
+                <div class="col-md-2">
+                  <br>
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Cari</button>
+                  <a href="pemasukan.php" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</a>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="box-body">
+
+          
 
             <!-- Modal -->
             <form action="pengeluaran_act.php" method="post">

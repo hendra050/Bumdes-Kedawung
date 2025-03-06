@@ -122,21 +122,6 @@
             </a>
           </li>
           
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-th-list"></i>
-              <span>Status Stok</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-              <li><a href="tambah.php"><i class="fa fa-plus"></i> <span>Penambahan Stok</span></a></li>
-              <li><a href="stok.php"><i class="fa fa-database"></i> <span>Sisa Stok</span></a></li>
-              <li><a href="harga.php"><i class="fa fa-usd"></i> <span>Update Harga</span></a></li>
-            </ul>
-          </li>
-          
           <li>
             <a href="pemasukan.php">
               <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>

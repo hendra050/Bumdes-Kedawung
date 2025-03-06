@@ -1,5 +1,5 @@
 <?php 
-include '../koneksi.php';
+include __DIR__ . '/../../koneksi.php';
 $id  = $_POST['id'];
 $kategori  = $_POST['kategori'];
 

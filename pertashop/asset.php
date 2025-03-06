@@ -22,29 +22,48 @@
             <h3 class="box-title">Asset Pertashop</h3>
             <div class="btn-group pull-right">            
 
-              <!-- <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
+              <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> &nbsp Tambah Kategori
-              </button> -->
+              </button>
             </div>
           </div>
           <div class="box-body">
 
             <!-- Modal -->
-            <!-- <form action="asset_act.php" method="post">
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form action="asset_act.php" method="post">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Tambah Asset</h5>
+                      <h4 class="modal-title" id="exampleModalLabel">Tambah Transaksi</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
+                      <div class="form-group">
+                        <label>Kategori</label>
+                        <select name="kategori" class="form-control" required="required">
+                          <option value="">- Pilih -</option>
+                          <?php 
+                          $kategori = mysqli_query($koneksi,"SELECT * FROM kategori_pertashop ORDER BY kategori ASC");
+                          while($k = mysqli_fetch_array($kategori)){
+                            ?>
+                            <option value="<?php echo $k['kategori_id']; ?>"><?php echo $k['kategori']; ?></option>
+                            <?php 
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea name="keterangan" class="form-control" rows="3"></textarea>
+                      </div>
 
                       <div class="form-group">
-                        <label>Nama Asset</label>
-                        <input type="text" name="kategori" required="required" class="form-control" placeholder="Nama Kategori ..">
+                        <label>Nominal</label>
+                        <input type="number" name="nominal" required="required" class="form-control" placeholder="Masukkan Nominal ..">
                       </div>
 
                     </div>
@@ -55,7 +74,7 @@
                   </div>
                 </div>
               </div>
-            </form> -->
+            </form>
 
 
             <div class="table-responsive">
