@@ -97,7 +97,7 @@
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td width="20%"><?php echo $d['opex_tanggal']; ?></td>
+                      <td width="15%"><?php echo $d['opex_tanggal']; ?></td>
                       <td><?php echo ($d['opex_kategori'] == "1") ? $d['opex_keterangan'] : "-"; ?></td>
                       <td><?php echo "Rp. ".number_format($d['opex_nominal'])." ,-" ?></td>
                       <td>    
@@ -115,24 +115,25 @@
                         }
                         ?>
 
+                        <!-- Modal Edit -->
                         <form action="asset_update.php" method="post">
-                          <div class="modal fade" id="edit_kategori_<?php echo $d['opex_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal fade" id="edit_kategori_<?php echo $d['opex_id'] ?>" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
+                                  <h4 class="modal-title">Edit Asset</h4>
+                                  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                 </div>
                                 <div class="modal-body">
-
-                                  <div class="form-group" style="width:100%">
-                                    <label>Nama Kategori</label>
-                                    <input type="hidden" name="id" required="required" class="form-control" placeholder="Nama Kategori .." value="<?php echo $d['opex_id']; ?>">
-                                    <input type="text" name="kategori" required="required" class="form-control" placeholder="Nama Kategori .." value="<?php echo $d['kategori']; ?>" style="width:100%">
+                                  <input type="hidden" name="id" value="<?php echo $d['opex_id']; ?>">
+                                  <div class="form-group"style="width:100%">
+                                    <label>Keterangan</label>
+                                    <textarea style="width:100%" name="keterangan" class="form-control" required><?php echo $d['opex_keterangan']; ?></textarea>
+                                  </div><br><br>
+                                  <div class="form-group"style="width:100%">
+                                    <label>Nominal</label>
+                                    <input style="width:100%" type="text" name="nominal" class="form-control rupiah" required value="<?php echo "Rp " . number_format($d['opex_nominal'], 0, ',', '.'); ?>">
                                   </div>
-
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -144,7 +145,7 @@
                         </form>
 
                         <!-- modal hapus -->
-                        <div class="modal fade" id="hapus_kategori_<?php echo $d['kategori_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="hapus_kategori_<?php echo $d['opex_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -160,7 +161,7 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <a href="kategori_hapus.php?id=<?php echo $d['kategori_id'] ?>" class="btn btn-primary">Hapus</a>
+                                <a href="asset_hapus.php?id=<?php echo $d['opex_id'] ?>" class="btn btn-primary">Hapus</a>
                               </div>
                             </div>
                           </div>

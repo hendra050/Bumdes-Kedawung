@@ -53,5 +53,5 @@ $insert_query = "INSERT INTO stok_pertashop (stok_awal, stok_masuk, tanggal_masu
 VALUES ('$stok_awal', '$stok_masuk', NOW(), '$stok_keluar', '$sisa_baru', '$odo_masuk', '$odo_keluar', '$odo', '$penguapan')";
 mysqli_query($koneksi, $insert_query) or die(mysqli_error($koneksi));
 
-header("location:stok.php");
+header("location:stok_kambing.php");
 ?>

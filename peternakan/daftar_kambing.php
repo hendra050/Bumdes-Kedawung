@@ -29,7 +29,7 @@
           <div class="box-body">
 
             <!-- Modal -->
-            <form action="stok_act.php" method="post">
+            <form action="stok_kambing_act.php" method="post">
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -62,18 +62,15 @@
               <table class="table table-bordered table-striped" id="table-datatable">
                 <thead>
                   <tr>
-                    <th class="text-center" rowspan="2">Tanggal</th>
-                    <th class="text-center" rowspan="2">STOK AWAL</th>
-                    <th class="text-center" rowspan="2">STOK MASUK</th>
-                    <th class="text-center" rowspan="2">STOK KELUAR</th>
-                    <th class="text-center" rowspan="2">STOK SISA</th>
-                    <th class="text-center" colspan="3">ODOMETER</th>
-                    <th class="text-center" rowspan="2">PENGUAPAN</th>
+                    <th class="text-center" rowspan="2">No Kandang</th>
+                    <th class="text-center" colspan="3">Jumlah Kambing/Kandang</th>
+                    <th class="text-center" rowspan="2">Keterangan</th>
+                    <!-- <th class="text-center" rowspan="2">PENGUAPAN</th> -->
                   </tr>
                   <tr>
-                    <th class="text-center">MASUK</th>
-                    <th class="text-center">KELUAR</th>
-                    <th class="text-center">SELISIH</th>
+                    <th class="text-center">Indukan</th>
+                    <th class="text-center">Anakan</th>
+                    <th class="text-center">Jumlah Kambing</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,7 +82,12 @@
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
-                      <td class="text-center" width="10%" ><?php echo $d['tanggal_masuk'];?></td>
+                      <td class="text-center">Kambing <?php echo $no++; ?></td>
+                      <td class="text-center">1</td>
+                      <td class="text-center">2</td>
+                      <td class="text-center">3</td>
+                      <td class="text-center">pengambilan umur melalui kode id kambing</td>
+                      <!-- <td class="text-center" width="10%" ><?php echo $d['tanggal_masuk'];?></td>
                       <td class="text-center">
                       <?php echo ($d['stok_awal'] == "0") ? "-" : $d['stok_awal'] . " liter"; ?>
                       </td>
@@ -97,7 +99,7 @@
                       <td class="text-center"><?php echo $d['odo_masuk'];?> liter</td>
                       <td class="text-center"><?php echo $d['odo_keluar'];?> liter</td>
                       <td class="text-center"><?php echo $d['odo'];?> liter</td>
-                      <td class="text-center"><?php echo $d['penguapan'];?> liter</td>
+                      <td class="text-center"><?php echo $d['penguapan'];?> liter</td> -->
                     </tr>
                     <?php 
                   }

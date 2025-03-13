@@ -83,23 +83,14 @@
                 </div>
               </div>
 
-              <a href="laporan_pdf.php?tanggal_dari=<?php echo $tgl_dari ?>&tanggal_sampai=<?php echo $tgl_sampai ?>&kategori=<?php echo $kategori ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file-pdf-o"></i> &nbsp CETAK PDF</a>
+              <a href="laporan_pdf_stok.php?tanggal_dari=<?php echo $tgl_dari ?>&tanggal_sampai=<?php echo $tgl_sampai ?>&kategori=<?php echo $kategori ?>" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-file-pdf-o"></i> &nbsp CETAK PDF</a>
               <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                   <?php
-                    $query = "
-                    SELECT output_tanggal AS tanggal, NULL AS kategori, NULL AS keterangan, output_total AS pemasukan, 0 AS pengeluaran
-                    FROM omset_pertashop
-                    WHERE DATE(output_tanggal) BETWEEN '$tgl_dari' AND '$tgl_sampai'
-                    
-                    UNION ALL
-                    
-                    SELECT opex_pertashop.opex_tanggal AS tanggal, kategori_pertashop.kategori AS kategori, 
-                          opex_pertashop.opex_keterangan AS keterangan, 0 AS pemasukan, opex_pertashop.opex_nominal AS pengeluaran
-                    FROM opex_pertashop
-                    JOIN kategori_pertashop ON opex_pertashop.opex_kategori = kategori_pertashop.kategori_id
-                    WHERE DATE(opex_pertashop.opex_tanggal) BETWEEN '$tgl_dari' AND '$tgl_sampai'
-                    
+                    $query =
+                    "SELECT tanggal_masuk AS tanggal, stok_awal, stok_masuk, stok_keluar, stok_sisa 
+                    FROM stok_pertashop
+                    WHERE DATE(tanggal_masuk) BETWEEN '$tgl_dari' AND '$tgl_sampai'
                     ORDER BY tanggal ASC";
                 
                     
@@ -111,15 +102,12 @@
                     ?>
                 <thead>
                   <tr> 
-                      <th width="1%" rowspan="2">NO</th>
-                      <th width="20%" rowspan="2" class="text-center">TANGGAL</th>
-                      <th rowspan="2" class="text-center" width="20%">KATEGORI</th>
-                      <th rowspan="2" class="text-center" width="30%">KETERANGAN</th>
-                      <th colspan="2" class="text-center" width="30%">JENIS</th>
-                  </tr>
-                  <tr>
-                      <th class="text-center" width="15%">PEMASUKAN</th>
-                      <th class="text-center" width="15%">PENGELUARAN</th>
+                      <th width="1%">NO</th>
+                      <th width="20%" class="text-center">TANGGAL</th>
+                      <th class="text-center" >STOK AWAL</th>
+                      <th class="text-center" >STOK MASUK</th>
+                      <th class="text-center" >STOK KELUAR</th>
+                      <th class="text-center" >STOK SISA</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -127,35 +115,25 @@
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
                       <td class="text-center"><?php echo date('d-m-Y H:i:s', strtotime($row['tanggal'])); ?></td>
-                      <td><?php echo $row['kategori'] ? $row['kategori'] : "Pemasukan"; ?></td>
-                      <td><?php echo $row['keterangan'] ? $row['keterangan'] : "" ; ?></td>
-                      <td class="text-center text-success" width="15%">
-                        <?php echo $row['pemasukan'] ? "Rp. " . number_format($row['pemasukan']) . " ,-": "-"; ?>
-                      </td>
-                      <td class="text-center text-danger" width="15%">
-                        <?php echo $row['pengeluaran'] ? "Rp. " . number_format($row['pengeluaran']) . " ,-": "-"; ?>
-                      </td>
+                      <td class="text-center"><?php echo $row['stok_awal'] ? $row['stok_awal'] : "-"; ?></td>
+                      <td class="text-center"><?php echo $row['stok_masuk'] ? $row['stok_masuk'] : "-" ; ?></td>
+                      <td class="text-center"><?php echo $row['stok_keluar'] ? $row['stok_keluar'] : "-" ; ?></td>
+                      <td class="text-center"><?php echo $row['stok_sisa'] ? $row['stok_sisa'] : "-" ; ?></td>
                     </tr>
                     <?php
-                      $total_pemasukan += $row['pemasukan'];
-                      $total_pengeluaran += $row['pengeluaran'];
+                      $total_pemasukan += $row['stok_masuk'];
+                      $total_pengeluaran += $row['stok_keluar'];
                     ?>
                   <?php endwhile; ?>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th colspan="4" class="text-right">TOTAL</th>
+                    <th colspan="3" class="text-right">TOTAL</th>
                     <td class="text-center text-bold text-success">
-                      <?php echo "Rp. " . number_format($total_pemasukan) . " ,-"; ?>
+                      <?php echo number_format($total_pemasukan); ?>
                     </td>
                     <td class="text-center text-bold text-danger">
-                      <?php echo "Rp. " . number_format($total_pengeluaran) . " ,-"; ?>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th colspan="4" class="text-right">LABA BERSIH</th>
-                    <td colspan="2" class="text-center text-bold text-white bg-primary">
-                      <?php echo "Rp. " . number_format($total_pemasukan - $total_pengeluaran) . " ,-"; ?>
+                      <?php echo number_format($total_pengeluaran); ?>
                     </td>
                   </tr>
                 </tfoot>

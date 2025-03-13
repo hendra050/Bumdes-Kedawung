@@ -23,7 +23,7 @@ $tanggal_masuk = $row_stok_masuk['input_tanggal'];
 $query_stok_keluar = "SELECT output_jual 
                     AS total_keluar 
                     FROM omset_pertashop 
-                    WHERE output_tanggal >= '$tanggal_masuk' 
+                    WHERE output_tanggal = '$tanggal_masuk' 
                     ORDER BY output_tanggal 
                     DESC LIMIT 1";
 $result_stok_keluar = mysqli_query($koneksi, $query_stok_keluar) or die(mysqli_error($koneksi));

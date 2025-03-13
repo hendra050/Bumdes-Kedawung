@@ -74,7 +74,7 @@
                   <tr>
                     <th class="text-center">AWAL</th>
                     <th class="text-center">AKHIR</th>
-                    <th class="text-center">SELISIH</th>
+                    <th class="text-center">MANUAL SISA</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -83,13 +83,13 @@
                   include '../koneksi.php';
                   $no=1;
                   $data = mysqli_query($koneksi, "SELECT * FROM stok_pertashop order by tanggal_masuk desc");
-                  while($d = mysqli_fetch_array($data)){
+                  while($d = mysqli_fetch_array($data)){    
                     ?>
                     <tr>
-                      <td class="text-center" width="10%" ><?php echo $d['tanggal_masuk'];?></td>
+                      <td class="text-center" width="10%"><?php echo $d['tanggal_masuk'];?></td>
                       <td class="text-center"><?php echo ($d['stok_awal'] == "0") ? "-" : $d['stok_awal'] . " liter"; ?></td>
                       <td class="text-center"><?php echo ($d['stok_masuk'] == "0") ? "-" : $d['stok_masuk'] . " liter"; ?></td>
-                      <td class="text-center"><?php echo $d['stok_keluar'];?> liter</td>
+                      <td class="text-center"><?php echo ($d['stok_keluar'] == "0") ? "-" : $d["stok_keluar"] . " liter";?></td>
                       <td class="text-center"><?php echo $d['stok_sisa'];?> liter</td>
                       <td class="text-center"><?php echo $d['manual_awal'];?> </td>
                       <td class="text-center"><?php echo $d['manual_akhir'];?> </td>

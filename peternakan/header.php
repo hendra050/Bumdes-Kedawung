@@ -137,19 +137,32 @@
           <li class="treeview">
             <a href="#">
               <i class="fa fa-file"></i>
-              <span>Laporan Keuangan</span>
+              <span>Stok Kambing</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu" style="display: none;">
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Laba/Rugi</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Arus Kas</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Neraca</a></li>
-              <li><a href="laporan.php"><i class="fa fa-circle-o"></i> Laporan Perubahan Modal</a></li>
+              <li>
+                <a href="stok_kambing.php">
+                  <i class="fa fa-circle-o"> </i> <span>Status Kandang</span>
+                </a>
+              </li>
+              <li>
+                <a href="daftar_kambing.php">
+                  <i class="fa fa-circle-o"> </i> <span>Daftar Kambing</span>
+                </a>
+              </li>
+
             </ul>
           </li>
 
+          <li>
+            <a href="laporan.php">
+              <i class="fa fa-file"> </i> <span>Laporan Laba/Rugi</span>
+            </a>
+          </li>
+          
           <li>
             <a href="gantipassword.php">
               <i class="fa fa-lock"></i> <span>Ganti Password</span>
