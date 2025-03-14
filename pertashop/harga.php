@@ -44,7 +44,7 @@
 
                       <div class="form-group">
                         <label>Harga Pokok Per Liter</label>
-                        <input type="number" name="harga" required="required" class="form-control" placeholder="Masukkan Update Hpp ..">
+                        <input type="text" name="harga" required="required" class="form-control rupiah" placeholder="Masukkan Update Hpp ..">
                       </div>
 
                     </div>
@@ -100,18 +100,10 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-
-                                  <div class="form-group" style="width:100%;margin-bottom:20px">
-                                    <label>Tanggal</label>
-                                    <input type="hidden" name="id" value="<?php echo $d['harga_id'] ?>">
-                                    <input type="text" style="width:100%" name="tanggal" required="required" class="form-control datepicker2" value="<?php echo $d['harga_tanggal'] ?>">
-                                  </div>
-
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Penjualan </label>
-                                    <input type="number" style="width:100%" name="harga" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan hari ini .." value="<?php echo $d['harga'] ?>">
+                                    <input type="text" style="width:100%" name="harga" required="required" class="form-control rupiah" placeholder="Masukkan Hasil Penjualan hari ini .." value="<?php echo $d['harga'] ?>">
                                   </div>
-
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

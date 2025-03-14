@@ -116,10 +116,10 @@
                     <th width="1%" rowspan="2">NO</th>
                     <th width="10%" class="text-center" >TANGGAL</th>
                     <th width="20%" class="text-center" >KATEGORI</th>
-                    <th width="10%" class="text-center" >JUMLAH</th>
+                    <th width="10%" class="text-center" >JUMLAH / Ekor</th>
                     <th width="20%" class="text-center" >HARGA</th>
                     <th width="20%" class="text-center" >TOTAL HARGA</th>
-                    <th width="5%" class="text-center">OPSI</th>
+                    <th width="10%" class="text-center">OPSI</th>
                   </tr>
                   
                 </thead>
@@ -149,31 +149,47 @@
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_output_<?php echo $d['output_id'] ?>">
                           <i class="fa fa-trash"></i>
                         </button>
-
-
+                        
+                        <!-- Modal Edit -->
                         <form action="pemasukan_update.php" method="post">
                           <div class="modal fade" id="edit_output_<?php echo $d['output_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h4 class="modal-title" id="exampleModalLabel">Edit output</h4>
+                                  <h4 class="modal-title" id="exampleModalLabel">Edit Pemasukan</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                  <input type="hidden" name="id" value="<?php echo $d['output_id']; ?>">
 
-                                  <div class="form-group" style="width:100%;margin-bottom:20px">
-                                    <label>Tanggal</label>
-                                    <input type="hidden" name="id" value="<?php echo $d['output_id'] ?>">
-                                    <input type="text" style="width:100%" name="tanggal" required="required" class="form-control datepicker2" value="<?php echo $d['output_tanggal'] ?>">
+                                  <!-- Input Jumlah -->
+                                  <div class="form-group">
+                                    <label>Jumlah /Ekor</label>
+                                    <input type="number" name="jumlah" required class="form-control" step="0.01" min="0" value="<?php echo $d['jumlah']; ?>">
                                   </div>
 
-                                  <div class="form-group" style="width:100%;margin-bottom:20px">
-                                    <label>Penjualan </label>
-                                    <input type="number" style="width:100%" name="jual" required="required" class="form-control" placeholder="Masukkan Hasil Penjualan hari ini .." value="<?php echo $d['output_total']; ?>" step="0.01" min="0">
-                                    </div>
+                                  <!-- Input Harga -->
+                                  <div class="form-group">
+                                    <label>Harga</label>
+                                    <input type="number" name="harga" required class="form-control" step="0.01" min="0" value="<?php echo $d['harga']; ?>">
+                                  </div>
 
+                                  <!-- Select Kategori -->
+                                  <div class="form-group">
+                                    <label>Kategori</label>
+                                    <select name="kategori" class="form-control" required>
+                                      <option value="">-- Pilih Kategori --</option>
+                                      <?php
+                                      $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori_omset_peternakan ORDER BY kategori asc");
+                                      while ($k = mysqli_fetch_assoc($kategori_query)) {
+                                        $selected = $k['kategori_id'] == $d['omset_kategori'] ? "selected" : "";
+                                        echo "<option value='".$k['kategori_id']."' $selected>".$k['kategori']."</option>";
+                                      }
+                                      ?>
+                                    </select>
+                                  </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

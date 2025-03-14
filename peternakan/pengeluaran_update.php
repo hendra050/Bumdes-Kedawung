@@ -1,14 +1,13 @@
 <?php
 include '../koneksi.php';
 
-if (isset($_POST['id']) && isset($_POST['tanggal']) && isset($_POST['kategori']) && isset($_POST['keterangan']) && isset($_POST['nominal'])) {
+if (isset($_POST['id']) && isset($_POST['kategori']) && isset($_POST['keterangan']) && isset($_POST['nominal'])) {
     $id = $_POST['id'];
-    $tanggal = $_POST['tanggal'];
     $kategori = $_POST['kategori'];
     $keterangan = $_POST['keterangan'];
     $nominal = $_POST['nominal'];
 
-    $query = "UPDATE opex_peternakan SET opex_tanggal = '$tanggal', opex_kategori = '$kategori', opex_keterangan = '$keterangan', opex_nominal = '$nominal' WHERE opex_id = '$id'";
+    $query = "UPDATE opex_peternakan SET opex_tanggal = now(), opex_kategori = '$kategori', opex_keterangan = '$keterangan', opex_nominal = '$nominal' WHERE opex_id = '$id'";
 
     $result = mysqli_query($koneksi, $query);
 

@@ -4,9 +4,8 @@ include '../koneksi.php';
 if (isset($_POST['id']) && isset($_POST['keterangan']) && isset($_POST['nominal'])) {
     $id         = $_POST['id'];
     $keterangan = $_POST['keterangan'];
-    $nominal    = $_POST['nominal'];
+    $nominal = preg_replace("/[^0-9]/", "", $_POST['nominal']);
 
-    // Hanya update keterangan dan nominal saja
     $query = "UPDATE opex_pertashop SET 
                 opex_keterangan = '$keterangan', 
                 opex_nominal = '$nominal' 

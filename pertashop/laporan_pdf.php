@@ -14,20 +14,12 @@ $pdf->Cell(280, 7, 'BUMDES SIDOMUKTI', 0, 1, 'C');
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(280, 7, 'LAPORAN LABA RUGI', 0, 1, 'C');
 
-// Space kebawah
-$pdf->Cell(10, 7, '', 0, 1);
-$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(0, 10, "Periode: " . date('d-m-Y', strtotime($tgl_dari)) . " s/d " . date('d-m-Y', strtotime($tgl_sampai)), 0, 1, 'C');
+$pdf->Ln(5);
 
-$pdf->Cell(35, 6, 'DARI TANGGAL', 0, 0);
-$pdf->Cell(5, 6, ':', 0, 0);
-$pdf->Cell(35, 6, date('d-m-Y', strtotime($tgl_dari)), 0, 0);
-$pdf->Cell(10, 7, '', 0, 1);
-$pdf->Cell(35, 6, 'SAMPAI TANGGAL', 0, 0);
-$pdf->Cell(5, 6, ':', 0, 0);
-$pdf->Cell(35, 6, date('d-m-Y', strtotime($tgl_sampai)), 0, 1);
-
-$pdf->Cell(10, 10, '', 0, 1);
 $pdf->SetFont('Arial', 'B', 10);
+$pdf->SetFillColor(200, 220, 255);
 
 $pdf->Cell(10, 14, 'NO', 1, 0, 'C');
 $pdf->Cell(35, 14, 'TANGGAL', 1, 0, 'C');

@@ -40,22 +40,18 @@
                       </button>
                     </div>
                     <div class="modal-body">
-
                     <div class="form-group">
                         <label>Jumlah</label>
                         <input type="number" name="jumlah" required="required" class="form-control" placeholder="Masukkan Jumlah .." step="0.01" min="0">
                       </div>
-
                       <div class="form-group">
                         <label>Harga/liter</label>
-                        <input type="number" name="harga" required="required" class="form-control" placeholder="Masukkan Harga ..">
+                        <input type="text" name="harga" required="required" class="form-control rupiah" placeholder="Masukkan Harga ..">
                       </div>
-
                       <div class="form-group">
                         <label>Foto</label>
                         <input type="file" name="foto" accept="image/">
                       </div>
-
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -129,7 +125,7 @@
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Harga/liter</label>
-                                    <input type="number" style="width:100%" name="harga" required="required" class="form-control" placeholder="Masukkan Harga .." value="<?php echo $d['input_perliter'] ?>">
+                                    <input type="text" style="width:100%" name="harga" required="required" class="form-control rupiah" placeholder="Masukkan Harga .." value="<?php echo $d['input_perliter'] ?>">
                                   </div>
 
                                   <label>Foto</label>

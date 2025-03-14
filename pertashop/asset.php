@@ -42,28 +42,13 @@
                     </div>
                     <div class="modal-body">
                       <div class="form-group">
-                        <label>Kategori</label>
-                        <select name="kategori" class="form-control" required="required">
-                          <option value="">- Pilih -</option>
-                          <?php 
-                          $kategori = mysqli_query($koneksi,"SELECT * FROM kategori_pertashop ORDER BY kategori ASC");
-                          while($k = mysqli_fetch_array($kategori)){
-                            ?>
-                            <option value="<?php echo $k['kategori_id']; ?>"><?php echo $k['kategori']; ?></option>
-                            <?php 
-                          }
-                          ?>
-                        </select>
-                      </div>
-                      
-                      <div class="form-group">
                         <label>Keterangan</label>
                         <textarea name="keterangan" class="form-control" rows="3"></textarea>
                       </div>
 
                       <div class="form-group">
                         <label>Nominal</label>
-                        <input type="number" name="nominal" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <input type="text" name="nominal" required="required" class="form-control rupiah" placeholder="Masukkan Nominal ..">
                       </div>
 
                     </div>

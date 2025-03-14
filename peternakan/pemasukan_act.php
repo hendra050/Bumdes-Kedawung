@@ -1,9 +1,9 @@
 <?php 
 include '../koneksi.php';
 
-$jumlah = $_POST['jumlah'];
-$harga = $_POST['harga'];
-$kategori = $_POST['kategori'];
+$jumlah     = $_POST['jumlah'];
+$harga      = $_POST['harga'];
+$kategori   = $_POST['kategori'];
 
 $total = $jumlah * $harga;
 

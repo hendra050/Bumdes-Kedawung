@@ -42,11 +42,11 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Perhitungan Manual Awal</label>
-                        <input type="number" name="manual_awal" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <input type="number" name="manual_awal" required="required" step="0.01" class="form-control" placeholder="Masukkan Nominal ..">
                       </div>
                       <div class="form-group">
                         <label>Perhitungan Manual Akhir</label>
-                        <input type="number" name="manual_akhir" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <input type="number" name="manual_akhir" required="required" step="0.01" class="form-control" placeholder="Masukkan Nominal ..">
                       </div>
                     </div>
                     <div class="modal-footer">
