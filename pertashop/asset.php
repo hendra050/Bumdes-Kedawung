@@ -41,6 +41,8 @@
                       </button>
                     </div>
                     <div class="modal-body">
+                      <input type="hidden" name="kategori" value="1">
+
                       <div class="form-group">
                         <label>Keterangan</label>
                         <textarea name="keterangan" class="form-control" rows="3"></textarea>

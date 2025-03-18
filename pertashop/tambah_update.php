@@ -6,7 +6,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 $id = $_POST['id']; 
-$tanggal  = $_POST['tanggal'];
+$now = date('Y-m-d H:i:s');
 $jumlah  = floatval($_POST['jumlah']);
 $harga = preg_replace("/[^0-9]/", "", $_POST['harga']);
 
@@ -19,7 +19,7 @@ $allowed =  array('png','jpg','jpeg');
 $filename = $_FILES['foto']['name'];
 
 if($filename == ""){
-	mysqli_query($koneksi, "UPDATE do_pertashop SET input_tanggal='$tanggal', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga' WHERE input_id='$id'");
+	mysqli_query($koneksi, "UPDATE do_pertashop SET input_edit='$now', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga' WHERE input_id='$id'");
 	header("location:tambah.php");
 }else{
 	$ext = pathinfo($filename, PATHINFO_EXTENSION);
@@ -31,7 +31,7 @@ if($filename == ""){
 
 		$file_gambar = $rand.'_'.$filename;
 
-		mysqli_query($koneksi, "UPDATE do_pertashop SET input_tanggal='$tanggal', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga', input_foto='$file_gambar' WHERE input_id='$id'");
+		mysqli_query($koneksi, "UPDATE do_pertashop SET input_edit='$now', input_jumlah='$jumlah', input_perliter='$harga', input_harga='$total_harga', input_foto='$file_gambar' WHERE input_id='$id'");
 		header("location:tambah.php");
 	}
 }

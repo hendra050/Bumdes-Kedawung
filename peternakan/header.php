@@ -121,22 +121,10 @@
               <i class="fa fa-dashboard"></i> <span>DASHBOARD</span>
             </a>
           </li>
-          
-          <li>
-            <a href="pemasukan.php">
-              <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>
-            </a>
-          </li>
 
-          <li>
-            <a href="pengeluaran.php">
-              <i class="fa fa-circle-o"> </i> <span>Pengeluaran</span>
-            </a>
-          </li>
-          
-          <li class="treeview">
+          <!-- <li class="treeview">
             <a href="#">
-              <i class="fa fa-file"></i>
+              <i class="fa fa-database"></i>
               <span>Stok Kambing</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -153,9 +141,27 @@
                   <i class="fa fa-circle-o"> </i> <span>Daftar Kambing</span>
                 </a>
               </li>
-
             </ul>
+          </li> -->
+          
+          <li>
+            <a href="kandang.php">
+              <i class="fa fa-circle-o"> </i> <span>Stok Kambing</span>
+            </a>
           </li>
+
+          <li>
+            <a href="pemasukan.php">
+              <i class="fa fa-circle-o"> </i> <span>Pemasukan</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="pengeluaran.php">
+              <i class="fa fa-circle-o"> </i> <span>Pengeluaran</span>
+            </a>
+          </li>
+          
 
           <li>
             <a href="laporan.php">

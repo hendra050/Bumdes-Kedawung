@@ -69,8 +69,9 @@
                   <tr>
                     <th width="1%">NO</th>
                     <th width="10%" class="text-center">TANGGAL</th>
+                    <th width="10%" class="text-center">TANGGAL EDIT</th>
                     <th class="text-center">JUMLAH</th>
-                    <th class="text-center">HARGA POKOK PENJUALAN</th>
+                    <th class="text-center" width="15%">HPP</th>
                     <th class="text-center">TOTAL HARGA</th>
                     <th class="text-center">FOTO</th>
                     <th width="10%" class="text-center">OPSI</th>
@@ -86,6 +87,7 @@
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
                       <td class="text-center"><?php echo $d['input_tanggal']; ?></td>
+                      <td class="text-center"><?php echo ($d['input_edit'] ? $d['input_edit'] : "-"); ?></td>
                       <td><?php echo $d['input_jumlah']; ?></td>
                       <td><?php echo "Rp. ".number_format($d['input_perliter'])." ,-" ?></td>
                       <td><?php echo "Rp. ".number_format($d['input_harga'])." ,-" ?></td>
@@ -117,6 +119,7 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                  <input type="hidden" name="id" value="<?php echo $d['input_id'] ?>">
 
                                   <div class="form-group" style="width:100%;margin-bottom:20px">
                                     <label>Jumlah</label>

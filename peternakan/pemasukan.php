@@ -136,13 +136,9 @@
                       <td class="text-center"><?php echo $d['kategori']; ?></td> 
                       <td class="text-center"><?php echo $d['jumlah']; ?></td>
                       <td class="text-center"><?php echo "Rp. " . number_format($d['harga']) . " ,-"; ?></td>
-                      <td class="text-center">
-                                              <?php echo isset($d['output_total']) ? "Rp. " . number_format($d['output_total']) . " ,-"
-                                                  : "Data tidak tersedia";
-                                              ?>
-                                          </td>
+                      <td class="text-center"><?php echo isset($d['output_total']) ? "Rp. " . number_format($d['output_total']) . " ,-": "Data tidak tersedia";?></td>
                       <td class="text-center">    
-                          <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_output_<?php echo $d['output_id'] ?>">
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_output_<?php echo $d['output_id'] ?>">
                               <i class="fa fa-cog"></i>
                         </button>
 
