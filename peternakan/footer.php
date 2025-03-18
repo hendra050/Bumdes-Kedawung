@@ -251,5 +251,16 @@
   }
 </script>
 
+<script>
+function toggleDetail(id) {
+  var detailRow = document.getElementById("detailRow" + id);
+  if (detailRow.style.display === "none") {
+    detailRow.style.display = "table-row";
+  } else {
+    detailRow.style.display = "none";
+  }
+}
+</script>
+
 </body>
 </html>

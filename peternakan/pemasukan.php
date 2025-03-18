@@ -82,7 +82,6 @@
                                         placeholder="Masukkan Hasil Penjualan Hari Ini .." step="0.01" min="0">
                               </div>
 
-                              <!-- Input kategori dengan select dropdown -->
                               <div class="form-group">
                                   <label>Kategori</label>
                                   <select name="kategori" class="form-control" required>
@@ -92,6 +91,20 @@
                                       $kategori_query = mysqli_query($koneksi, "SELECT * FROM kategori_omset_peternakan ORDER BY kategori asc");
                                       while ($row = mysqli_fetch_assoc($kategori_query)) {
                                           echo "<option value='".$row['kategori_id']."'>".$row['kategori']."</option>";
+                                      }
+                                      ?>
+                                  </select>
+                              </div>
+
+                              <div class="form-group">
+                                  <label>Dari Kandang</label>
+                                  <select name="kandang" class="form-control" required>
+                                      <option value="">-- Pilih Kandang --</option>
+                                      <?php
+                                      include '../koneksi.php';
+                                      $kandang_query = mysqli_query($koneksi, "SELECT * FROM kandang ORDER BY id_kandang asc");
+                                      while ($row = mysqli_fetch_assoc($kandang_query)) {
+                                          echo "<option value='".$row['id_kandang']."'>".$row['nama_kandang']."</option>";
                                       }
                                       ?>
                                   </select>
@@ -117,8 +130,9 @@
                     <th width="10%" class="text-center" >TANGGAL</th>
                     <th width="20%" class="text-center" >KATEGORI</th>
                     <th width="10%" class="text-center" >JUMLAH / Ekor</th>
-                    <th width="20%" class="text-center" >HARGA</th>
+                    <th width="20%" class="text-center" >HARGA / Ekor</th>
                     <th width="20%" class="text-center" >TOTAL HARGA</th>
+                    <th width="10%" class="text-center" >KANDANG</th>
                     <th width="10%" class="text-center">OPSI</th>
                   </tr>
                   
@@ -127,7 +141,11 @@
                   <?php   
                   include '../koneksi.php';
                   $no=1;
-                  $data = mysqli_query($koneksi, "SELECT * FROM omset_peternakan, kategori_omset_peternakan WHERE kategori_id= omset_kategori order by output_tanggal desc");
+                  $data = mysqli_query($koneksi, "SELECT * FROM omset_peternakan 
+                  LEFT JOIN kategori_omset_peternakan ON kategori_id = omset_kategori 
+                  LEFT JOIN kandang ON kandang.id_kandang = omset_peternakan.kandang 
+                  ORDER BY output_tanggal DESC");
+                  
                   while($d = mysqli_fetch_array($data)){
                     ?>
                     <tr>
@@ -137,6 +155,7 @@
                       <td class="text-center"><?php echo $d['jumlah']; ?></td>
                       <td class="text-center"><?php echo "Rp. " . number_format($d['harga']) . " ,-"; ?></td>
                       <td class="text-center"><?php echo isset($d['output_total']) ? "Rp. " . number_format($d['output_total']) . " ,-": "Data tidak tersedia";?></td>
+                      <td class="text-center"><?php echo $d['nama_kandang']; ?></td>
                       <td class="text-center">    
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_output_<?php echo $d['output_id'] ?>">
                               <i class="fa fa-cog"></i>

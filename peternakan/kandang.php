@@ -24,9 +24,6 @@
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> &nbsp Tambah Stok Masuk
               </button>
-              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#stokKeluarModal">
-                <i class="fa fa-minus"></i> &nbsp Tambah Stok Keluar
-              </button>
             </div>
           </div>
           <div class="box-body">
@@ -77,76 +74,23 @@
               </div>
             </form>
 
-            <!-- Modal Tambah Stok Keluar -->
-            <form action="stok_keluar_act.php" method="post">
-              <div class="modal fade" id="stokKeluarModal" tabindex="-1" role="dialog" aria-labelledby="stokKeluarLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="stokKeluarLabel">Tambah Stok Keluar</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      
-                      <div class="form-group">
-                        <label>Kandang</label>
-                        <select name="id_kandang" class="form-control" required>
-                          <option value="">-- Pilih Kandang --</option>
-                          <?php 
-                          $kandang = mysqli_query($koneksi,"SELECT * FROM kandang");
-                          while($k = mysqli_fetch_array($kandang)){
-                          ?>
-                            <option value="<?php echo $k['id_kandang'] ?>"><?php echo $k['nama_kandang'] ?></option>
-                          <?php } ?>
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                        <label>Jumlah Keluar</label>
-                        <input type="number" name="jumlah" class="form-control" required placeholder="Jumlah kambing keluar...">
-                      </div>
-
-                      <div class="form-group">
-                        <label>Jenis Keluar</label>
-                        <select name="jenis_keluar" class="form-control" required>
-                          <option value="">-- Pilih Jenis --</option>
-                          <option value="Dijual">Dijual</option>
-                          <option value="Mati">Mati</option>
-                          <option value="Dipindah">Dipindah</option>
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                        <label>Keterangan</label>
-                        <textarea name="keterangan" class="form-control" placeholder="Opsional..."></textarea>
-                      </div>
-
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                      <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-
             <div class="table-responsive">
               <table class="table table-bordered table-striped" id="table-datatable">
                 <thead>
                   <tr>
                     <th class="text-center" width="5%">No.</th>
                     <th class="text-center" >Nama Kandang</th>
-                    <th class="text-center" >Kapasistas</th>
+                    <th class="text-center" >Kapasitas</th>
                     <th class="text-center" >OPSI</th>
                   </tr>
                 </thead>
                 <tbody>
-                  
                   <?php 
                   include '../koneksi.php';
+                  ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
                   $no=1;
                   $data = mysqli_query($koneksi, "SELECT * FROM kandang order by id_kandang asc");
                   while($d = mysqli_fetch_array($data)){
@@ -154,7 +98,26 @@
                     <tr>
                       <td class="text-center"><?php echo $no++; ?></td>
                       <td class="text-center"><?php echo $d['nama_kandang'];?></td>
-                      <td class="text-center"><?php echo $d['kapasitas'];?></td>
+                      <?php 
+                        // Hitung stok masuk per kandang
+                        $id_kandang = $d['id_kandang'];
+
+                        $q_masuk = mysqli_query($koneksi, "SELECT SUM(jumlah) as total_masuk FROM peternakan_stok_masuk WHERE id_kandang='$id_kandang'");
+                        $masuk = mysqli_fetch_assoc($q_masuk);
+                        $total_masuk = $masuk['total_masuk'] ?? 0;
+
+                        // Hitung stok keluar per kandang
+                        $q_keluar = mysqli_query($koneksi, "SELECT SUM(jumlah) as total_keluar FROM omset_peternakan WHERE kandang='$id_kandang'");
+                        $keluar = mysqli_fetch_assoc($q_keluar);
+                        $total_keluar = $keluar['total_keluar'] ?? 0;
+
+                        // Hitung kapasitas terpakai
+                        $kapasitas_terpakai = $total_masuk - $total_keluar;
+                      ?>
+                      <td class="text-center">
+                        <?php echo $kapasitas_terpakai . " ekor"; ?>
+                      </td>
+
                       <td class="text-center">
                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_output_<?php echo $d['id_kandang'] ?>">
                               <i class="fa fa-eye"></i>

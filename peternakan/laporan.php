@@ -24,25 +24,20 @@
             <form method="get" action="">
               <div class="row">
                 <div class="col-md-3">
-
                   <div class="form-group">
                     <label>Mulai Tanggal</label>
                     <input autocomplete="off" type="text" value="<?php if(isset($_GET['tanggal_dari'])){echo $_GET['tanggal_dari'];}else{echo "";} ?>" name="tanggal_dari" class="form-control datepicker2" placeholder="Mulai Tanggal" required="required">
                   </div>
-
                 </div>
 
                 <div class="col-md-3">
-
                   <div class="form-group">
                     <label>Sampai Tanggal</label>
                     <input autocomplete="off" type="text" value="<?php if(isset($_GET['tanggal_sampai'])){echo $_GET['tanggal_sampai'];}else{echo "";} ?>" name="tanggal_sampai" class="form-control datepicker2" placeholder="Sampai Tanggal" required="required">
                   </div>
-
                 </div>
 
                 <div class="col-md-3">
-
                   <div class="form-group">
                     <label>Kategori</label>
                     <select name="kategori" class="form-control" required="required">
@@ -57,16 +52,13 @@
                       ?>
                     </select>
                   </div>
-
                 </div>
 
                 <div class="col-md-3">
-
                   <div class="form-group">
                     <br/>
                     <input type="submit" value="TAMPILKAN" class="btn btn-sm btn-primary btn-block">
                   </div>
-
                 </div>
               </div>
             </form>
