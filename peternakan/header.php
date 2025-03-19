@@ -122,7 +122,7 @@
             </a>
           </li>
 
-          <!-- <li class="treeview">
+          <li class="treeview">
             <a href="#">
               <i class="fa fa-database"></i>
               <span>Stok Kambing</span>
@@ -132,22 +132,16 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
               <li>
-                <a href="stok_kambing.php">
-                  <i class="fa fa-circle-o"> </i> <span>Status Kandang</span>
+                <a href="kandang.php">
+                  <i class="fa fa-circle-o"> </i> <span>Stok Kambing</span>
                 </a>
               </li>
               <li>
-                <a href="daftar_kambing.php">
-                  <i class="fa fa-circle-o"> </i> <span>Daftar Kambing</span>
+                <a href="riwayat_tambah_stok.php">
+                  <i class="fa fa-circle-o"> </i> <span>Riwayat Tambah Stok</span>
                 </a>
               </li>
             </ul>
-          </li> -->
-          
-          <li>
-            <a href="kandang.php">
-              <i class="fa fa-circle-o"> </i> <span>Stok Kambing</span>
-            </a>
           </li>
 
           <li>

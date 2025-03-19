@@ -1,5 +1,4 @@
 <?php include 'header.php'; ?>
-
 <div class="content-wrapper">
 
   <section class="content-header">
@@ -17,10 +16,9 @@
     <div class="row">
       <section class="col-lg-12">
         <div class="box box-info">
-
           <div class="box-header">
             <h3 class="box-title">Total Stok Yang Dimiliki</h3>
-            <div class="btn-group pull-right">            
+            <div class="btn-group pull-right">
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> &nbsp Tambah Stok Masuk
               </button>
@@ -30,43 +28,40 @@
 
             <!-- Modal Tambah Stok -->
             <form action="stok_kambing_act.php" method="post">
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title" id="exampleModalLabel">Tambah Stok Masuk</h4>
+                      <h4 class="modal-title">Tambah Stok Masuk</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-                      
                       <div class="form-group">
                         <label>Kandang</label>
                         <select name="id_kandang" class="form-control" required>
                           <option value="">-- Pilih Kandang --</option>
                           <?php 
-                          $kandang = mysqli_query($koneksi,"SELECT * FROM kandang");
+                          include '../koneksi.php';
+                          $kandang = mysqli_query($koneksi,"SELECT * FROM kandang ORDER BY id_kandang ASC");
                           while($k = mysqli_fetch_array($kandang)){
                           ?>
-                            <option value="<?php echo $k['id_kandang'] ?>"><?php echo $k['nama_kandang'] ?></option>
+                          <option value="<?php echo $k['id_kandang'] ?>"><?php echo $k['nama_kandang'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
-
                       <div class="form-group">
                         <label>Jumlah Masuk</label>
                         <input type="number" name="jumlah" class="form-control" required placeholder="Jumlah kambing masuk...">
                       </div>
-
                       <div class="form-group">
                         <label>Keterangan</label>
                         <textarea name="keterangan" class="form-control" placeholder="Opsional..."></textarea>
                       </div>
-
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                       <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                   </div>
@@ -74,191 +69,60 @@
               </div>
             </form>
 
+            <?php if(isset($_GET['alert']) && $_GET['alert'] == "berhasil"){ ?>
+              <div class="alert alert-success">Stok masuk berhasil ditambahkan!</div>
+            <?php } ?>
+
             <div class="table-responsive">
               <table class="table table-bordered table-striped" id="table-datatable">
                 <thead>
                   <tr>
-                    <th class="text-center" width="5%">No.</th>
-                    <th class="text-center" >Nama Kandang</th>
-                    <th class="text-center" >Kapasitas</th>
-                    <th class="text-center" >OPSI</th>
+                    <th>No</th>
+                    <th>Nama Kandang</th>
+                    <th style="background-color: #187498; color:rgb(255, 255, 255);">Stok Masuk</th>
+                    <th style="background-color: #eb5353; color:rgb(255, 255, 255);">Terjual (Dewasa)</th>
+                    <th style="background-color: #eb5353; color:rgb(255, 255, 255);">Terjual (Anakan)</th>
+                    <th style="background-color: #eb5353; color:rgb(255, 255, 255);">Terjual Matang</th>
+                    <th style="background-color: #36ae7c; color:rgb(255, 255, 255);">Sisa Stok</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php 
-                  include '../koneksi.php';
-                  ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-                  $no=1;
-                  $data = mysqli_query($koneksi, "SELECT * FROM kandang order by id_kandang asc");
-                  while($d = mysqli_fetch_array($data)){
-                    ?>
-                    <tr>
-                      <td class="text-center"><?php echo $no++; ?></td>
-                      <td class="text-center"><?php echo $d['nama_kandang'];?></td>
-                      <?php 
-                        // Hitung stok masuk per kandang
-                        $id_kandang = $d['id_kandang'];
-
-                        $q_masuk = mysqli_query($koneksi, "SELECT SUM(jumlah) as total_masuk FROM peternakan_stok_masuk WHERE id_kandang='$id_kandang'");
-                        $masuk = mysqli_fetch_assoc($q_masuk);
-                        $total_masuk = $masuk['total_masuk'] ?? 0;
-
-                        // Hitung stok keluar per kandang
-                        $q_keluar = mysqli_query($koneksi, "SELECT SUM(jumlah) as total_keluar FROM omset_peternakan WHERE kandang='$id_kandang'");
-                        $keluar = mysqli_fetch_assoc($q_keluar);
-                        $total_keluar = $keluar['total_keluar'] ?? 0;
-
-                        // Hitung kapasitas terpakai
-                        $kapasitas_terpakai = $total_masuk - $total_keluar;
-                      ?>
-                      <td class="text-center">
-                        <?php echo $kapasitas_terpakai . " ekor"; ?>
-                      </td>
-
-                      <td class="text-center">
-                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_output_<?php echo $d['id_kandang'] ?>">
-                              <i class="fa fa-eye"></i>
-                        </button>
-                          <!-- Modal Detail Kandang -->
-                          <div class="modal fade" id="edit_output_<?php echo $d['id_kandang'] ?>" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel_<?php echo $d['id_kandang'] ?>" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h4 class="modal-title" id="detailModalLabel_<?php echo $d['id_kandang'] ?>">Detail Kandang</h4>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <h4>Data Stok Masuk</h4>
-                                  <table class="table table-bordered">
-                                    <thead class="bg-info text-white">
-                                      <tr>
-                                        <th>No</th>
-                                        <th>Tanggal</th>
-                                        <th>Jumlah Masuk</th>
-                                        <th>Keterangan</th>
-                                        <th>Opsi</th>
-                                      </tr>
-                                    </thead>
-                                    <?php
-                                    $id_kandang = $d['id_kandang'];
-                                    $masuk = mysqli_query($koneksi, "SELECT * FROM stok_masuk WHERE id_kandang='$id_kandang' ORDER BY tanggal DESC");
-                                    $no=1;
-                                    while($m = mysqli_fetch_array($masuk)){
-                                    ?>
-                                    <tr>
-                                      <td><?= $no++; ?></td>
-                                      <td><?= date('d-m-Y', strtotime($m['tanggal'])); ?></td>
-                                      <td><?= $m['jumlah']; ?></td>
-                                      <td><?= $m['keterangan']; ?></td>
-                                      <td>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_output_<?php echo $m['id_masuk'] ?>">
-                                          <i class="fa fa-trash"></i>
-                                        </button>
-                                        <!-- modal hapus -->
-                                        <div class="modal fade" id="hapus_output_<?php echo $m['id_masuk'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <h4 class="modal-title" id="exampleModalLabel">Peringatan!</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span>
-                                                </button>
-                                              </div>
-                                              <div class="modal-body">
-
-                                                <p>Yakin ingin menghapus data ini ?</p>
-
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                <a href="stok_masuk_hapus.php?id=<?php echo $m['id_masuk'] ?>" class="btn btn-primary">Hapus</a>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                    </tr>
-                                    <?php } ?>
-                                  </table>
-
-                                  <h4>Data Stok Keluar</h4>
-                                  <table class="table table-bordered">
-                                    <thead class="bg-danger text-dark">
-                                      <tr>
-                                        <th>No</th>
-                                        <th>Tanggal</th>
-                                        <th>Jumlah Keluar</th>
-                                        <th>Jenis</th>
-                                        <th>Keterangan</th>
-                                        <th>Opsi</th>
-                                      </tr>
-                                    </thead>
-                                    <?php
-                                    $keluar = mysqli_query($koneksi, "SELECT * FROM stok_keluar WHERE id_kandang='$id_kandang' ORDER BY tanggal DESC");
-                                    $no=1;
-                                    while($k = mysqli_fetch_array($keluar)){
-                                    ?>
-                                    <tr>
-                                      <td><?= $no++; ?></td>
-                                      <td><?= date('d-m-Y', strtotime($k['tanggal'])); ?></td>
-                                      <td><?= $k['jumlah']; ?></td>
-                                      <td><?= $k['jenis_keluar']; ?></td>
-                                      <td><?= $k['keterangan']; ?></td>
-                                      <td>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_output_<?php echo $k['id_keluar'] ?>">
-                                          <i class="fa fa-trash"></i>
-                                        </button>
-                                        <!-- modal hapus -->
-                                        <div class="modal fade" id="hapus_output_<?php echo $k['id_keluar'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <h4 class="modal-title" id="exampleModalLabel">Peringatan!</h4>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span>
-                                                </button>
-                                              </div>
-                                              <div class="modal-body">
-
-                                                <p>Yakin ingin menghapus data ini ?</p>
-
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                <a href="stok_keluar_hapus.php?id=<?php echo $k['id_keluar'] ?>" class="btn btn-primary">Hapus</a>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                    </tr>
-                                    <?php } ?>
-                                  </table>
-                                </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <?php 
-                  }
-                  ?>
+                <?php
+                $no = 1;
+                $kandang = mysqli_query($koneksi, "SELECT * FROM kandang ORDER BY id_kandang ASC");
+                while($k = mysqli_fetch_array($kandang)) {
+                  $id_kandang = $k['id_kandang'];
+                  $masuk = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT SUM(jumlah) AS total_masuk FROM stok_kambing_masuk WHERE kandang='$id_kandang'"))['total_masuk'] ?? 0;
+                  $terjual_dewasa = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT SUM(jumlah) AS total FROM omset_peternakan WHERE kandang='$id_kandang' AND omset_kategori='81'"))['total'] ?? 0;
+                  $terjual_anakan = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT SUM(jumlah) AS total FROM omset_peternakan WHERE kandang='$id_kandang' AND omset_kategori='84'"))['total'] ?? 0;
+                  $matang = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT SUM(jumlah) AS total FROM omset_peternakan WHERE kandang='$id_kandang' AND omset_kategori='83'"))['total'] ?? 0;
+                  $sisa = $masuk - ($terjual_dewasa + $terjual_anakan + $matang);
+                ?>
+                <tr>
+                  <td><?= $no++; ?></td>
+                  <td><?= $k['nama_kandang']; ?></td>
+                  <td><?= $masuk; ?></td>
+                  <td><?= $terjual_dewasa; ?></td>
+                  <td><?= $terjual_anakan; ?></td>
+                  <td><?= $matang; ?></td>
+                  <td><?= $sisa; ?></td>
+                </tr>
+                <?php } ?>
                 </tbody>
               </table>
             </div>
-          </div>
 
+          </div>
         </div>
       </section>
     </div>
   </section>
-
 </div>
+
+<script>
+  $(document).ready(function(){
+    $('#table-datatable').DataTable();
+  });
+</script>
+
 <?php include 'footer.php'; ?>
