@@ -48,7 +48,7 @@ if (mysqli_num_rows($result) > 0) {
         $jam_login = (int) date('H', $time_login);
         $jam_input = (int) date('H', $time_input);
 
-        if ($jam_login >= 7 && $jam_login < 15) {
+        if ($jam_login >= 7 && $jam_login < 15) {   
             $shift = ($jam_input < 15) ? "pagi" : "fullday";
         } elseif ($jam_login >= 15 && $jam_login < 22) {
             $shift = ($jam_input < 22) ? "siang" : "fullday";

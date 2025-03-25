@@ -141,6 +141,11 @@
                   <i class="fa fa-circle-o"> </i> <span>Riwayat Tambah Stok</span>
                 </a>
               </li>
+              <li>
+                <a href="tambah_kandang.php">
+                  <i class="fa fa-circle-o"> </i> <span>Tambah Kandang</span>
+                </a>
+              </li>
             </ul>
           </li>
 
@@ -156,10 +161,15 @@
             </a>
           </li>
           
+          <li>
+            <a href="laporan_labarugi.php">
+              <i class="fa fa-file"> </i> <span>Laporan Laba/Rugi</span>
+            </a>
+          </li>
 
           <li>
-            <a href="laporan.php">
-              <i class="fa fa-file"> </i> <span>Laporan Laba/Rugi</span>
+            <a href="laporan_stok.php">
+              <i class="fa fa-file"> </i> <span>Laporan Stok</span>
             </a>
           </li>
           

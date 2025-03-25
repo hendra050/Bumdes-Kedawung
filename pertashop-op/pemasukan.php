@@ -68,11 +68,11 @@
                     <div class="modal-body">
                       <div class="form-group">
                         <label>Odo Masuk</label>
-                        <input type="number" name="odomasuk" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <input type="number" name="odomasuk" required="required" class="form-control" placeholder="Masukkan Nominal .." step="0.01" >
                       </div>
                       <div class="form-group">
                         <label>Odo Keluar</label>
-                        <input type="number" name="odokeluar" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <input type="number" name="odokeluar" required="required" class="form-control" placeholder="Masukkan Nominal .." step="0.01">
                       </div>
                     </div>
                     <div class="modal-footer">
