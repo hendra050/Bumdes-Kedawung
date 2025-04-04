@@ -139,7 +139,7 @@
                   </thead>
                   <tbody>
                     <?php 
-                    include __DIR__ . '/../koneksi.php';
+                    include '../koneksi.php';
                     $no=1;
                     $total_pemasukan=0;
                     $total_pengeluaran=0;

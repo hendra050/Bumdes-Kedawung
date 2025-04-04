@@ -49,20 +49,11 @@
                 </select>
               </div>
               <div class="form-group">
-                <label>Role Operator (Opsional):</label>
-                <select class="form-control" name="role_operator" required="required">
-                    <option value="">-- Pilih --</option>
-                    <option value="operator">Operator</option>
-                    <option value="operator_magang">Operator Magang</option>
-                </select>
-              </div>
-
-              <div class="form-group">
                 <label>Foto</label>
                 <input type="file" name="foto">
               </div>
               <div class="form-group">
-                <input name="submit" type="submit" class="btn btn-sm btn-primary" value="Simpan">
+                <input type="submit" class="btn btn-sm btn-primary" value="Simpan">
               </div>
             </form>
           </div>

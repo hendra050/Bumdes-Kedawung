@@ -111,6 +111,11 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
           </li>
+          <li>
+            <a href="<?php echo MANAJEMEN_URL; ?>pengeluaran.php">
+              <i class="fa fa-dollar"></i> <span>Pengeluaran</span>
+            </a>
+          </li>
           
           <li class="treeview">
             <a href="">

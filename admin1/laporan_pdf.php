@@ -14,7 +14,7 @@ $pdf->AddPage();
 // setting jenis font yang akan digunakan
 $pdf->SetFont('Arial','B',14);
 // mencetak string 
-$pdf->Cell(280,7,'SISTEM INFORMASI KEUANGAN',0,1,'C');
+$pdf->Cell(280,7,'BUMDES SUGENG ABADI MULUR',0,1,'C');
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(280,7,'LAPORAN KEUANGAN',0,1,'C');
 
@@ -82,8 +82,8 @@ while($d = mysqli_fetch_array($data)){
 
   $pdf->Cell(10,7,$no++,1,0,'C');
   $pdf->Cell(35,7,date('d-m-Y', strtotime($d['transaksi_tanggal'])),1,0,'C');
-  $pdf->Cell(45,7, $d['kategori'] ,1,0,'C');
-  $pdf->Cell(105,7,$d['transaksi_keterangan'],1,0,'C');
+  $pdf->Cell(45,7, $d['kategori'] ,1,0,'L');
+  $pdf->Cell(105,7,$d['transaksi_keterangan'],1,0,'L');
 
   if($d['transaksi_jenis'] == "Pemasukan"){
     $pem = "Rp. ".number_format($d['transaksi_nominal'])." ,-";
@@ -97,15 +97,15 @@ while($d = mysqli_fetch_array($data)){
     $peng = "-";
   }
 
-  $pdf->Cell(41,7,$pem,1,0,'C');
-  $pdf->Cell(41,7,$peng,1,1,'C');
+  $pdf->Cell(41,7,$pem,1,0,'R');
+  $pdf->Cell(41,7,$peng,1,1,'R');
 
   $pdf->Cell(10,0,'',0,1);
 }
 
 $pdf->Cell(195,7, "TOTAL" ,1,0,'R');
-$pdf->Cell(41,7,"Rp. ".number_format($total_pemasukan)." ,-",1,0,'C');
-$pdf->Cell(41,7,"Rp. ".number_format($total_pengeluaran)." ,-",1,1,'C');
+$pdf->Cell(41,7,"Rp. ".number_format($total_pemasukan)." ,-",1,0,'R');
+$pdf->Cell(41,7,"Rp. ".number_format($total_pengeluaran)." ,-",1,1,'R');
 
 $pdf->Cell(10,0,'',0,1);
 
