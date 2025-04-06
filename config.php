@@ -34,3 +34,6 @@ if (!defined('PETERNAKAN_URL')) {
 if (!defined('ADMIN_URL')) {
     define('ADMIN_URL', BASE_URL . 'admin/');
 }
+if (!defined('BELUM_URL')) {
+    define('BELUM_URL', BASE_URL . 'belum_login/');
+}

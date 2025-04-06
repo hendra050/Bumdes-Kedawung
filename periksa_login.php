@@ -30,8 +30,8 @@ if($cek > 0){
 		$_SESSION['status'] = "peternakan_logedin";
 		header("location:peternakan/");
 	}else{
-		header("location:index.php?alert=gagal");
+		header("location:bumdes.php?alert=gagal");
 	}
 }else{
-	header("location:index.php?alert=gagal");
+	header("location:bumdes.php?alert=gagal");
 }

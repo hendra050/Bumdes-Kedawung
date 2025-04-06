@@ -1,115 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Badan Usaha Milik Desa Sidomukti Kedawung</title>
-        <style>
-            @import url("https://fonts.googleapis.com/css2?family=Figtree&display=swap");
+<?php require_once 'belum_login/header.php'; ?>
 
-            * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Figtree", sans-serif;
-            }
+<div class="content-wrapper">
 
-            body {
-            display: grid;
-            place-content: center;
-            min-height: 100vh;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.9)), url("gambar/sistem/background.jpg");
-            background-size: 100% 
-            }
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
 
-            .container {
-            position: relative;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1em;
-            width: 600px;
-            height: 400px;
-            transition: all 400ms;
-            }
+  <?php 
+    function get_total($koneksi, $column, $table1, $table2, $condition) {
+        $query = "SELECT 
+            (SELECT SUM($column) FROM $table1 WHERE $condition) +
+            (SELECT SUM($column) FROM $table2 WHERE $condition) 
+            AS total";
+        $result = mysqli_query($koneksi, $query);
+        $data = mysqli_fetch_assoc($result);
+        return $data['total'] ?? 0;
+    }
 
-            .container:hover .box {
-            filter: grayscale(20%) opacity(55%);
-            }
+    $pemasukan_minggu_ini = get_total($koneksi, 'output_total', 'omset_pertashop', 'omset_peternakan', 'YEARWEEK(output_tanggal, 1) = YEARWEEK(CURDATE(), 1)');
+    $pengeluaran_minggu_ini = get_total($koneksi, 'opex_nominal', 'opex_pertashop', 'opex_peternakan', 'YEARWEEK(opex_tanggal, 1) = YEARWEEK(CURDATE(), 1)');
+    
+    $pemasukan_bulan_ini = get_total($koneksi, 'output_total', 'omset_pertashop', 'omset_peternakan', 'YEAR(output_tanggal) = YEAR(CURDATE()) AND MONTH(output_tanggal) = MONTH(CURDATE())');
+    $pengeluaran_bulan_ini = get_total($koneksi, 'opex_nominal', 'opex_pertashop', 'opex_peternakan', 'YEAR(opex_tanggal) = YEAR(CURDATE()) AND MONTH(opex_tanggal) = MONTH(CURDATE())');
+    
+    $pemasukan_semester_ini = get_total($koneksi, 'output_total', 'omset_pertashop', 'omset_peternakan', 'YEAR(output_tanggal) = YEAR(CURDATE()) AND ((MONTH(output_tanggal) BETWEEN 1 AND 6 AND MONTH(CURDATE()) BETWEEN 1 AND 6) OR (MONTH(output_tanggal) BETWEEN 7 AND 12 AND MONTH(CURDATE()) BETWEEN 7 AND 12))');
+    $pengeluaran_semester_ini = get_total($koneksi, 'opex_nominal', 'opex_pertashop', 'opex_peternakan', 'YEAR(opex_tanggal) = YEAR(CURDATE()) AND ((MONTH(opex_tanggal) BETWEEN 1 AND 6 AND MONTH(CURDATE()) BETWEEN 1 AND 6) OR (MONTH(opex_tanggal) BETWEEN 7 AND 12 AND MONTH(CURDATE()) BETWEEN 7 AND 12))');
+    
+    $pemasukan_tahun_ini = get_total($koneksi, 'output_total', 'omset_pertashop', 'omset_peternakan', 'YEAR(output_tanggal) = YEAR(CURDATE())');
+    $pengeluaran_tahun_ini = get_total($koneksi, 'opex_nominal', 'opex_pertashop', 'opex_peternakan', 'YEAR(opex_tanggal) = YEAR(CURDATE())');
+  ?>
 
-            .box {
-            position: relative;
-            background: var(--img) center center;
-            background-size: cover;
-            transition: all 400ms;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            }
-
-            .container .box:hover {
-            filter: grayscale(0%) opacity(100%);
-            }
-
-            .container:has(.box-2:hover) {
-            grid-template-columns: 3fr 1fr 1fr;
-            }
-
-            .container:has(.box-3:hover) {
-            grid-template-columns: 1fr 3fr 1fr;
-            }
-
-            .container:has(.box-4:hover) {
-            grid-template-columns: 1fr 1fr 3fr;
-            }
-
-            .box:nth-child(odd) {
-            transform: translateY(-16px);
-            }
-
-            .box:nth-child(even) {
-            transform: translateY(16px);
-            }
-
-            .box::after {
-            content: attr(data-text);
-            position: absolute;
-            bottom: 20px;
-            background: #000;
-            color: #fff;
-            padding: 10px 10px 10px 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            transform: translateY(60px);
-            opacity: 0;
-            transition: all 400ms;
-            }
-
-            .box:hover::after {
-            transform: translateY(0);
-            opacity: 1;
-            transition-delay: 100ms;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div
-                class="box box-2"
-                style="--img: url(https://asset.kompas.com/crops/Rb27Owiq-tuvLCuzNBIRr5Fvkrs=/421x0:3187x1844/1200x800/data/photo/2023/07/10/64ac1e00b7865.jpg)"
-                data-text="Pertashop"
-                onclick="window.location.href='pertashop.php'"
-            ></div>
-            <div
-                class="box box-3"
-                style="--img: url(gambar/bumdes.jpg)"
-                data-text="Bumdes"
-                onclick="window.location.href='bumdes.php'"
-            ></div>
-            <div
-                class="box box-4"
-                style="--img: url(https://www.pertanianku.com/wp-content/uploads/2016/08/Mengenal-Macam-macam-Jenis-Kambing-Gibas.jpg)"
-                data-text="Peternakan"
-                onclick="window.location.href='peternakan.php'"
-            ></div>
+  <section class="content">
+    
+    <div class="row">
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-green">
+          <div class="inner">
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pemasukan_minggu_ini ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Minggu Ini</p>
+          </div>
+          <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
-    </body>
-</html>
+      </div>
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+          <div class="inner">
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pemasukan_bulan_ini ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Bulan Ini</p>
+          </div>
+          <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-red">
+          <div class="inner">
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pemasukan_semester_ini ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Semester Ini</p>
+          </div>
+          <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-black">
+            <div class="inner">
+                <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pemasukan_tahun_ini ?? 0) . " ,-" ?></h4>
+                <p>Penjualan Tahun Ini</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="pemasukan.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
+
+
+<!-- pengeluaran -->
+
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-green">
+          <div class="inner">
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pengeluaran_minggu_ini ?? 0) . " ,-" ?></h4>
+            <p>Pengeluaran Minggu Ini</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+          <div class="inner">
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pengeluaran_bulan_ini ?? 0) . " ,-" ?></h4>
+            <p>Pengeluaran Bulan Ini</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-red">
+          <div class="inner">
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pengeluaran_semester_ini ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Semester Ini</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-black">
+          <div class="inner">
+            <h4 style="font-weight: bolder"><?php echo "Rp. " . number_format($pengeluaran_tahun_ini ?? 0) . " ,-" ?></h4>
+            <p>Penjualan Tahun Ini</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="pengeluaran.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+
+      <!-- Left col -->
+      <section class="col-lg-8">
+
+        <div class="nav-tabs-custom">
+
+          <ul class="nav nav-tabs pull-right">
+            <li class="active"><a href="#tab1" data-toggle="tab">Pemasukan & Pengeluaran</a></li>
+            <li class="pull-left header">Grafik</li>
+          </ul>
+
+          <div class="tab-content" style="padding: 20px">
+
+            <div class="chart tab-pane active" id="tab1">             
+              <h4 class="text-center">Grafik Data Pemasukan & Pengeluaran Per <b>Bulan</b></h4>
+              <canvas id="grafik1" style="position: relative; height: 300px;"></canvas>
+              <br/>
+              <br/>
+              <br/>
+
+              <h4 class="text-center">Grafik Data Pemasukan & Pengeluaran Per <b>Tahun</b></h4>
+              <canvas id="grafik2" style="position: relative; height: 300px;"></canvas>
+
+            </div>
+            <div class="chart tab-pane" id="tab2" style="position: relative; height: 300px;">
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+      <!-- /.Left col -->
+
+
+      <section class="col-lg-4">
+
+
+        <!-- Calendar -->
+        <div class="box box-solid bg-green-gradient">
+          <div class="box-header">
+            <i class="fa fa-calendar"></i>
+            <h3 class="box-title">Kalender</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <!--The calendar -->
+            <div id="calendar" style="width: 100%"></div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+
+      </section>
+      <!-- right col -->
+    </div>
+    <!-- /.row (main row) -->
+  </section>
+
+</div>
+<?php include 'belum_login/footer.php'; ?>
