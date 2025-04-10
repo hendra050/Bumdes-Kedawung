@@ -1,0 +1,7 @@
+<?php 
+include '../koneksi.php';
+
+$id = $_GET['id'];
+mysqli_query($koneksi, "DELETE FROM pemasukan_bumdes WHERE id='$id'");
+
+header("location:pemasukan.php");

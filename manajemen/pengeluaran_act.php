@@ -1,13 +1,10 @@
 <?php 
 include '../koneksi.php';
 
-$kategori = $_POST['kategori'];
-$keterangan = $_POST['keterangan'];
-$nominal = $_POST['nominal'];
+$kategori    = $_POST['kategori'];
+$katerangan  = $_POST['katerangan'];
+$total = preg_replace("/[^0-9]/", "", $_POST['total']);
 
-$insert_query = "INSERT INTO opex_pertashop (opex_tanggal, opex_kategori, opex_keterangan, opex_nominal)
-VALUES (now(), '$kategori', '$keterangan', '$nominal')";
-mysqli_query($koneksi, $insert_query) or die(mysqli_error($koneksi));
+mysqli_query($koneksi, "INSERT INTO opex_bumdes (tanggal, kategori, katerangan, total) VALUES (NOW(), '$kategori', '$katerangan', '$total')");
 
 header("location:pengeluaran.php");
-?>

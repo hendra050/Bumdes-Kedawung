@@ -108,12 +108,23 @@
 
           <li>
             <a href="<?php echo MANAJEMEN_URL; ?>index.php">
-              <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              <i class="fa fa-dashboard"></i> <span>Dashboard Bumdes</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?php echo MANAJEMEN_URL; ?>dashboard_unit.php">
+              <i class="fa fa-dashboard"></i> <span>Dashboard Unit Usaha</span>
             </a>
           </li>
           <li>
             <a href="<?php echo MANAJEMEN_URL; ?>pengeluaran.php">
               <i class="fa fa-dollar"></i> <span>Pengeluaran</span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="<?php echo MANAJEMEN_URL; ?>pemasukan.php">
+              <i class="fa fa-dollar"></i> <span>Pemasukan</span>
             </a>
           </li>
           
