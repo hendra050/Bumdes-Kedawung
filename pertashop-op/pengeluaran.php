@@ -88,7 +88,7 @@
 
                       <div class="form-group">
                         <label>Nominal</label>
-                        <input type="number" name="nominal" required="required" class="form-control" placeholder="Masukkan Nominal ..">
+                        <input type="text" name="nominal" required="required" class="form-control rupiah" placeholder="Masukkan Nominal ..">
                       </div>
 
                     </div>
